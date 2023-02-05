@@ -7,8 +7,8 @@ execute:
 website: 
   page-navigation: true
   title: "Making sharable documents with Quarto" 
-  site-url: "https://openscapes.github.io/quarto-website-tutorial" 
-  repo-url: https://github.com/openscapes/quarto-website-tutorial 
+  site-url: "https://carypersonal.github.io/cary-personal-workspace/" 
+  repo-url: https://github.com/CaryPersonal/cary-personal-workspace.git 
   repo-actions: [edit, issue]
   
   page-footer:
