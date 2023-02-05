@@ -6,7 +6,7 @@ execute:
   
 website: 
   page-navigation: true
-  title: "Making sharable documents with Quarto" 
+  title: "Cary's Personal Workspace" 
   site-url: "https://carypersonal.github.io/cary-personal-workspace/" 
   repo-url: https://github.com/CaryPersonal/cary-personal-workspace.git 
   repo-actions: [edit, issue]
@@ -60,5 +60,3 @@ format:
 filters:
   - include-files.lua
   - quarto
-
-  
