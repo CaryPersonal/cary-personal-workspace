@@ -5,26 +5,34 @@ subtitle: "KEEP LEARNING!"
 
 # STAT0023 ICA1 Quiz {#welcome}
 
+Required Packages
+
+```{r, eval=FALSE}
+library(Hmisc)
+library(RColorBrewer)
+library(ggplot2)
+```
+
 ## Week 1
 
 ### R Basics
 
 #### NA
 
-![NA (Not Available): missing values; NaN (Not a Number): illegal operations](images/NA1.png){width="800"}
+![NA (Not Available): missing values; NaN (Not a Number): illegal operations](images/NA1.png){fig-align="left" width="800"}
 
-![](images/NA2.png){width="800"}
+![](images/NA2.png){fig-align="left" width="800"}
 
 #### NaN
 
-![](images/NaN1.png)
+![](images/NaN1.png){fig-align="left"}
 
 ### Exploratory Analysis
 
 #### Galapagos Islands Data (species.data)
 
 ```{r, eval=FALSE}
-species.data <- read.table("galapagos.dat",header=TRUE)
+species.data <- read.table("galapagos.dat", header = TRUE)
 ```
 
 What is the name of the (smallest) / (second largest) Galapagos island in the dataset?
@@ -34,4 +42,114 @@ What is the name of the (smallest) / (second largest) Galapagos island in the da
 rownames(species.data)[which.min(species.data$Area)]
 ## the second largest
 rownames(species.data)[order(species.data$Area, decreasing = TRUE)[2]]
+```
+
+How many plant species are there in total on the second largest Galapagos island in the dataset?
+
+```{r, eval=FALSE}
+species.data$Species[order(species.data$Area, decreasing = TRUE)[2]]
+```
+
+What is the name of the island with a value of 25 for the Elevation variable?
+
+```{r, eval=FALSE}
+rownames(species.data)[species.data$Elevation == 25]
+```
+
+How many islands have fewer than 25 species in total?
+
+```{r, eval=FALSE}
+sum(species.data$Species < 25)
+```
+
+What is the estimated slope in a linear regression of Area upon Scruz?
+
+```{r, eval=FALSE}
+Model <- lm(Area ~ Scruz, data = species.data)
+summary(Model)
+print(Model$coefficients, digits = 8)
+```
+
+#### Iris Data
+
+```{r, eval=FALSE}
+iris <- iris
+```
+
+What is the mean of the petal widths for all of the flowers in the dataset?
+
+```{r, eval=FALSE}
+mean(iris$Petal.Width)
+```
+
+What is the mean of the petal widths for all of the "setosa" flowers in the dataset?
+
+```{r, eval=FALSE}
+mean(iris$Petal.Width[iris$Species == "setosa"])
+## or
+tapply(iris$Petal.Width, INDEX = iris$Species, FUN = mean)
+```
+
+Considering the petal lengths of the flowers, which of the three species has the largest standard deviation?
+
+```{r, eval=FALSE}
+tapply(iris$Petal.Length, INDEX = iris$Species, FUN = sd)
+```
+
+What is the 40th percentile of the petal lengths for all of the flowers in the dataset?
+
+```{r, eval=FALSE}
+print(quantile(iris$Petal.Length, probs = 0.4), digits = 8)
+```
+
+Considering the petal lengths of the flowers, which of the three species has the largest 90th percentile?
+
+```{r, eval=FALSE}
+tapply(iris$Petal.Length, INDEX = iris$Species, FUN = quantile, probs = 0.9)
+```
+
+Carry out a two-tailed t test, assuming equal variances, for a difference between the population mean petal widths for "versicolor" and "virginica" flowers.
+
+```{r, eval=FALSE}
+t.test(iris$Petal.Width[iris$Species == "versicolor"],
+       iris$Petal.Width[iris$Species == "virginica"],
+       var.equal = TRUE)
+```
+
+Carry out an *F* test of the null hypothesis that the population variance of sepal lengths is the same for flowers of "setosa" and "virginica" species.
+
+```{r, eval=FALSE}
+var.test(iris$Sepal.Length[iris$Species == "setosa"],
+         iris$Sepal.Length[iris$Species == "virginica"])
+```
+
+To three decimal places, what is the lower limit of a 90% confidence interval for the difference between the population mean petal widths for "versicolor" and "virginica" flowers?
+
+```{r, eval=FALSE}
+t.test(iris$Petal.Width[iris$Species == "versicolor"],
+       iris$Petal.Width[iris$Species == "virginica"],
+       var.equal = TRUE,
+       conf.level = 0.90)
+```
+
+### Graphics
+
+```{r}
+x <- seq(-2, 2, 0.05)
+x2 <- x^2
+x3 <- x^3
+plot(x, x2)
+lines(x, x3, lwd = 2, col = "red")
+```
+
+#### ChickWeight Data
+
+```{r, eval=FALSE}
+ChickWeight <- ChickWeight
+```
+
+#### CO2 Data
+
+```{r, eval=FALSE}
+CO2 <- CO2
 ```
