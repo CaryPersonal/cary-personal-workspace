@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Cary’s Personal Workspace",
     "section": "",
-    "text": "R (Last Updated On: 5 February 2023)\nTest again and again and again"
+    "text": "NA (Not Available): missing values; NaN (Not a Number): illegal operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies.data <- read.table(\"galapagos.dat\",header=TRUE)\n\nWhat is the name of the (smallest) / (second largest) Galapagos island in the dataset?\n\n## the smallest\nrownames(species.data)[which.min(species.data$Area)]\n## the second largest\nrownames(species.data)[order(species.data$Area, decreasing = TRUE)[2]]"
   },
   {
     "objectID": "index.html#what-is-quarto",

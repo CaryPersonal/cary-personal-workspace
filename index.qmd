@@ -3,16 +3,35 @@ title: "Cary's Personal Workspace"
 subtitle: "KEEP LEARNING!"
 ---
 
-## STAT0023 ICA1 Quiz {#welcome}
+# STAT0023 ICA1 Quiz {#welcome}
 
-### Week 1
+## Week 1
 
-#### R Basics
+### R Basics
 
-##### NA
+#### NA
 
-![](images/NA1.png)
+![NA (Not Available): missing values; NaN (Not a Number): illegal operations](images/NA1.png){width="800"}
 
-##### NaN
+![](images/NA2.png){width="800"}
+
+#### NaN
 
 ![](images/NaN1.png)
+
+### Exploratory Analysis
+
+#### Galapagos Islands Data (species.data)
+
+```{r, eval=FALSE}
+species.data <- read.table("galapagos.dat",header=TRUE)
+```
+
+What is the name of the (smallest) / (second largest) Galapagos island in the dataset?
+
+```{r, eval=FALSE}
+## the smallest
+rownames(species.data)[which.min(species.data$Area)]
+## the second largest
+rownames(species.data)[order(species.data$Area, decreasing = TRUE)[2]]
+```

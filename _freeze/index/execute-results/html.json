@@ -1,0 +1,14 @@
+{
+  "hash": "8f0d30a67c3b8eeb19a615942211997a",
+  "result": {
+    "markdown": "---\ntitle: \"Cary's Personal Workspace\"\nsubtitle: \"KEEP LEARNING!\"\n---\n\n\n# STAT0023 ICA1 Quiz {#welcome}\n\n## Week 1\n\n### R Basics\n\n#### NA\n\n![NA (Not Available): missing values; NaN (Not a Number): illegal operations](images/NA1.png){width=\"800\"}\n\n![](images/NA2.png){width=\"800\"}\n\n#### NaN\n\n![](images/NaN1.png)\n\n### Exploratory Analysis\n\n#### Galapagos Islands Data (species.data)\n\n\n::: {.cell}\n\n```{.r .cell-code}\nspecies.data <- read.table(\"galapagos.dat\",header=TRUE)\n```\n:::\n\n\nWhat is the name of the (smallest) / (second largest) Galapagos island in the dataset?\n\n\n::: {.cell}\n\n```{.r .cell-code}\n## the smallest\nrownames(species.data)[which.min(species.data$Area)]\n## the second largest\nrownames(species.data)[order(species.data$Area, decreasing = TRUE)[2]]\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
