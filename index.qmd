@@ -308,3 +308,56 @@ Rule-of-thumb: observation influential if **Cook's distance** **exceeds** $\frac
 -   [**Add additional terms to the model**]{.underline}. For the temperature data for example, you might consider extending the quadratic model to include third-degree terms in latitude and longitude; or additional covariates such as altitude if these were available.
 
 -   If the diagnostics suggest that the [**residual variance is related to the fitted values**]{.underline} (e.g. the 'residuals versus fitted values' plot has a funnel shape) and there is good reason to suspect that the responses follow [**non-normal distributions**]{.underline} (e.g. because they are counts, so that Poisson distributions might be more appropriate) then a more general class of models may be appropriate --- such as generalized linear models (GLMs).
+
+## **Week 3**
+
+### **Basic Programming Techniques**
+
+#### **Logical Expressions**
+
+![](images/Logical1.png){fig-align="left" width="800"}
+
+#### **Write Some Expressions**
+
+Return TRUE if there is at least one strictly negative value in a vector x, and FALSE otherwise.
+
+```{r, eval=FALSE}
+any(x<0)
+```
+
+Extract the elements of a vector x that are both (i) strictly positive (ii) divisible by 10.
+
+```{r, eval=FALSE}
+x[x>0&x%%10==0]
+```
+
+Extract the rows of a matrix or data frame y for which the corresponding elements of a vector x are non-negative, where x is a vector with length equal to the number of rows of y.
+
+```{r, eval=FALSE}
+y[x>=0,]
+```
+
+Extract the elements of a vector y for which the corresponding elements of x are strictly negative.
+
+```{r, eval=FALSE}
+y[x<0]
+```
+
+#### **`trapezium()` function**
+
+Create a function to approximate an integral using the trapezium rule with equally spaced x values.
+
+```{r, eval=FALSE}
+trapezium <- function(v, a, b) {
+  n <- length(v) - 1
+  h <- (b - a) / n
+  intv <- (h / 2) * (sum(v) + sum(v[2 : n]))
+  intv
+}
+```
+
+Use the above function to evaluate the integral $\int_{1}^{5}arctan(x)dx$ with 39 evaluation points (i.e. so that the input vector v has 39 elements).
+
+```{r, eval=FALSE}
+trapezium(atan(seq(1, 5,length.out = 39)), 1, 5)
+```

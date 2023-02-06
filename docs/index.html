@@ -230,6 +230,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#regression-models-assumptions-and-interpretation" id="toc-regression-models-assumptions-and-interpretation" class="nav-link" data-scroll-target="#regression-models-assumptions-and-interpretation"><strong>Regression Models: Assumptions and Interpretation</strong></a></li>
   <li><a href="#get-your-eyes-in-residual-plots" id="toc-get-your-eyes-in-residual-plots" class="nav-link" data-scroll-target="#get-your-eyes-in-residual-plots"><strong>Get your Eyes in: Residual Plots</strong></a></li>
   </ul></li>
+  <li><a href="#week-3" id="toc-week-3" class="nav-link" data-scroll-target="#week-3"><strong>Week 3</strong></a>
+  <ul class="collapse">
+  <li><a href="#basic-programming-techniques" id="toc-basic-programming-techniques" class="nav-link" data-scroll-target="#basic-programming-techniques"><strong>Basic Programming Techniques</strong></a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -541,6 +545,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><u><strong>Add additional terms to the model</strong></u>. For the temperature data for example, you might consider extending the quadratic model to include third-degree terms in latitude and longitude; or additional covariates such as altitude if these were available.</p></li>
 <li><p>If the diagnostics suggest that the <u><strong>residual variance is related to the fitted values</strong></u> (e.g.&nbsp;the ‘residuals versus fitted values’ plot has a funnel shape) and there is good reason to suspect that the responses follow <u><strong>non-normal distributions</strong></u> (e.g.&nbsp;because they are counts, so that Poisson distributions might be more appropriate) then a more general class of models may be appropriate — such as generalized linear models (GLMs).</p></li>
 </ul>
+</section>
+</section>
+</section>
+<section id="week-3" class="level2">
+<h2 class="anchored" data-anchor-id="week-3"><strong>Week 3</strong></h2>
+<section id="basic-programming-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="basic-programming-techniques"><strong>Basic Programming Techniques</strong></h3>
+<section id="logical-expressions" class="level4">
+<h4 class="anchored" data-anchor-id="logical-expressions"><strong>Logical Expressions</strong></h4>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Logical1.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+</section>
+<section id="write-some-expressions" class="level4">
+<h4 class="anchored" data-anchor-id="write-some-expressions"><strong>Write Some Expressions</strong></h4>
+<p>Return TRUE if there is at least one strictly negative value in a vector x, and FALSE otherwise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(x<span class="sc">&lt;</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Extract the elements of a vector x that are both (i) strictly positive (ii) divisible by 10.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x[x<span class="sc">&gt;</span><span class="dv">0</span><span class="sc">&amp;</span>x<span class="sc">%%</span><span class="dv">10</span><span class="sc">==</span><span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Extract the rows of a matrix or data frame y for which the corresponding elements of a vector x are non-negative, where x is a vector with length equal to the number of rows of y.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>y[x<span class="sc">&gt;=</span><span class="dv">0</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Extract the elements of a vector y for which the corresponding elements of x are strictly negative.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>y[x<span class="sc">&lt;</span><span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="trapezium-function" class="level4">
+<h4 class="anchored" data-anchor-id="trapezium-function"><strong><code>trapezium()</code> function</strong></h4>
+<p>Create a function to approximate an integral using the trapezium rule with equally spaced x values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>trapezium <span class="ot">&lt;-</span> <span class="cf">function</span>(v, a, b) {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(v) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  h <span class="ot">&lt;-</span> (b <span class="sc">-</span> a) <span class="sc">/</span> n</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  intv <span class="ot">&lt;-</span> (h <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">*</span> (<span class="fu">sum</span>(v) <span class="sc">+</span> <span class="fu">sum</span>(v[<span class="dv">2</span> <span class="sc">:</span> n]))</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  intv</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use the above function to evaluate the integral <span class="math inline">\(\int_{1}^{5}arctan(x)dx\)</span> with 39 evaluation points (i.e.&nbsp;so that the input vector v has 39 elements).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trapezium</span>(<span class="fu">atan</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>,<span class="at">length.out =</span> <span class="dv">39</span>)), <span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
