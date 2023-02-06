@@ -15,23 +15,23 @@ library(maps)
 library(robustbase)
 ```
 
-## Week 1
+## **Week 1**
 
-### R Basics
+### **R Basics**
 
-#### NA
+#### **NA**
 
 ![NA (Not Available): missing values; NaN (Not a Number): illegal operations](images/NA1.png){fig-align="left" width="800"}
 
 ![](images/NA2.png){fig-align="left" width="800"}
 
-#### NaN
+#### **NaN**
 
 ![](images/NaN1.png){fig-align="left" width="800"}
 
-### Exploratory Analysis
+### **Exploratory Analysis**
 
-#### Galapagos Islands Data (species.data)
+#### **Galapagos Islands Data (species.data)**
 
 ```{r, eval=FALSE}
 species.data <- read.table("galapagos.dat", header = TRUE)
@@ -72,7 +72,7 @@ summary(Model)
 print(Model$coefficients, digits = 8)
 ```
 
-#### Iris Data
+#### **Iris Data**
 
 ```{r, eval=FALSE}
 iris <- iris
@@ -134,7 +134,7 @@ t.test(iris$Petal.Width[iris$Species == "versicolor"],
        conf.level = 0.90)
 ```
 
-### Graphics
+### **Graphics**
 
 ```{r}
 x <- seq(-2, 2, 0.05)
@@ -144,37 +144,39 @@ plot(x, x2)
 lines(x, x3, lwd = 2, col = "red")
 ```
 
-#### ChickWeight Data
+#### **ChickWeight Data**
 
 ```{r, eval=FALSE}
 ChickWeight <- ChickWeight
 ```
 
-#### CO2 Data
+#### **CO2 Data**
 
 ```{r, eval=FALSE}
 CO2 <- CO2
 ```
 
-## Week 2
+## **Week 2**
 
-### Regression Models: Assumptions and Interpretation
+### **Regression Models: Assumptions and Interpretation**
 
-#### Deal With Standard Errors
+#### **Deal With Standard Errors**
 
 ![](images/SD1.png){fig-align="left" width="800"}
 
-#### Standard Assumptions of the Linear Regression Model
+![](images/SD2.png){fig-align="left" width="800"}
+
+#### **Standard Assumptions of the Linear Regression Model**
 
 ![](images/Assumptions1.png){fig-align="left" width="800"}
 
-#### Iris Data
+#### **Iris Data**
 
 ```{r, eval=FALSE}
 iris <- iris
 ```
 
-##### Model 0 (No Intercept)
+##### **Model 0 (No Intercept)**
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species - 1, data = iris)
@@ -182,7 +184,7 @@ Model <- lm(Petal.Length ~ Species - 1, data = iris)
 
 The coefficient estimates in the above model (no intercept) are just [**the sample means**]{.underline}.
 
-##### Model 1 (Intercept Included)
+##### **Model 1 (Intercept Included)**
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species, data = iris)
@@ -190,7 +192,7 @@ Model <- lm(Petal.Length ~ Species, data = iris)
 
 The intercept in the above model (intercept included) is the [**Setosa sample mean**]{.underline}. The coefficient estimates are the [**differences**]{.underline} between the [**respective means**]{.underline} and the [**Setosa mean**]{.underline}.
 
-##### Model 2 ("Sum to Zero" Constraint)
+##### **Model 2 ("Sum to Zero" Constraint)**
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species, data = iris, contrasts = list(Species = "contr.sum"))
@@ -204,7 +206,7 @@ Species 3: Virginica
 
 The intercept in the above model ("sum to zero" constraint) is the [**overall mean**]{.underline} petal length for all the iris flowers. The coefficients represent the [**differences**]{.underline} between the [**respective means**]{.underline} and the [**overall mean**]{.underline}.
 
-##### Model 3
+##### **Model 3**
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species + Sepal.Length, data = iris)
@@ -212,7 +214,7 @@ Model <- lm(Petal.Length ~ Species + Sepal.Length, data = iris)
 
 The intercept in the above model is [**the expected petal length for Setosa when the sepal length is zero**]{.underline}.
 
-##### Model 4 (Interaction Included)
+##### **Model 4 (Interaction Included)**
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species + Sepal.Length + Species:Sepal.Length, data = iris)
@@ -220,8 +222,83 @@ Model <- lm(Petal.Length ~ Species + Sepal.Length + Species:Sepal.Length, data =
 
 The main effect coefficients for Versicolor and Virginica represent [**differences relative to Setosa**]{.underline}. Two additional coefficients for the interactions represent [**differences**]{.underline} in the [**slopes of the Petal.Length:Sepal.Length relationship**]{.underline} for these two species, [**relative to the slope for Setosa flowers**]{.underline}.
 
-#### UStemps Data
+#### **UStemps Data**
 
 ```{r, eval=FALSE}
-ustemp <- ustemp
+load("UStemps.rda")
+ustemp$longitude <- -ustemp$longitude
 ```
+
+##### **Model 1 (Base Model)**
+
+```{r, eval=FALSE}
+Model1 <- lm(min.temp ~ latitude + longitude, data = ustemp)
+```
+
+##### **Model 2 (Quadratic Model)**
+
+```{r, eval=FALSE}
+Model2 <- lm(min.temp ~ latitude + longitude + I(latitude^2) + I(longitude^2) + latitude:longitude, data = ustemp)
+```
+
+###### **Model 2 (Quadratic Model) Diagnostics Plots**
+
+```{r, eval=FALSE}
+par(mfrow = c(2,2),
+    mar = c(3,3,2,2),
+    mgp = c(2,0.75,0))
+plot(Model2, which = 1:4)
+```
+
+Cook's Distance plot shows three observations that may be influential, they are:
+
+```{r, eval=FALSE}
+ustemp[c(5, 13, 52), ]
+## 5: Los Angeles, CA
+## 13: Miami, FL
+## 52: Seattle, WA
+```
+
+##### **Model 2Rob (Robust Fit of the Quadratic Model)**
+
+```{r, eval=FALSE}
+Model2Rob <- lmrob(min.temp ~ latitude + longitude + I(latitude^2) + I(longitude^2) + latitude:longitude, data = ustemp)
+```
+
+**Note**: the purpose of robust estimation is to try and [**include all of the observations**]{.underline}, but to [**limit the extent**]{.underline} to which any individual observation can influence the fit.
+
+### **Get your Eyes in: Residual Plots**
+
+#### **Failures of Assumptions**
+
+-   **Systematic structure in mean residuals**
+
+    "Residuals vs Fitted Values" plot, or "Residuals vs Covariates" plot.
+
+    Such structure indicates that the modelled representation of the regression function is inadequate. Whether this matters is context-specific: you may decide, for example, that the residuals are all so small that your model is already predicting well enough.
+
+-   **Non-constant variance**
+
+    "Residuals vs Fitted Values" plot may exhibit a "funnel" shape (i.e. the residual variance seems higher at one end than the other).
+
+    "Scale-Location" plot: the absolute residuals tend to be larger at one end than the other.
+
+    In this case, the least-squares estimates are not fully efficient (i.e. you're not making the best use of your data), and the [**reported standard errors will be incorrect**]{.underline} --- as will the [**results of any hypothesis tests and confidence interval calculations**]{.underline}.
+
+-   **Non-normal residuals**
+
+    "Normal Q-Q plot": the residuals don't fall roughly on a straight line.
+
+    This is not critical in large samples, the exception is where you want to calculate prediction intervals for future observations: these will only be accurate if the future observations do indeed have an approximate normal distribution.
+
+-   **Lack of independence**
+
+    Common situations in which it might be a problem are when data are collected at successive time points, or at a collection of spatial locations. Although none of the 'standard' plots is designed to check for this, lack of independence can lead to apparent structure in some of the residual plots. For example, if observations are collected sequentially in time and successive residuals are highly correlated, this can give the appearance of curvature in the "[**Residuals vs Fitted Values**]{.underline}" plot: the curvature is not due to a nonlinear relationship between response and covariates, but simply due to the fact that [**neighbouring residuals are similar to each other because they are correlated**]{.underline}.
+
+#### **Fix the Problem**
+
+-   [**Transform**]{.underline} the response variable and / or covariate (but only if the resulting model makes scientific sense). Sometimes, a relationship can be made more linear by [**taking logs or square roots of one or more quantities**]{.underline}; transforming the response variable can also help to make the residual variance more constant, and to make the assumption of normality more reasonable. Don't take logs (or square roots) of quantities that could be negative, though!
+
+-   [**Add additional terms to the model**]{.underline}. For the temperature data for example, you might consider extending the quadratic model to include third-degree terms in latitude and longitude; or additional covariates such as altitude if these were available.
+
+-   If the diagnostics suggest that the [**residual variance is related to the fitted values**]{.underline} (e.g. the 'residuals versus fitted values' plot has a funnel shape) and there is good reason to suspect that the responses follow [**non-normal distributions**]{.underline} (e.g. because they are counts, so that Poisson distributions might be more appropriate) then a more general class of models may be appropriate --- such as generalized linear models (GLMs).

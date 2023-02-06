@@ -218,15 +218,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">STAT0023 ICA1 Quiz</a>
   <ul class="collapse">
-  <li><a href="#week-1" id="toc-week-1" class="nav-link" data-scroll-target="#week-1">Week 1</a>
+  <li><a href="#week-1" id="toc-week-1" class="nav-link" data-scroll-target="#week-1"><strong>Week 1</strong></a>
   <ul class="collapse">
-  <li><a href="#r-basics" id="toc-r-basics" class="nav-link" data-scroll-target="#r-basics">R Basics</a></li>
-  <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis">Exploratory Analysis</a></li>
-  <li><a href="#graphics" id="toc-graphics" class="nav-link" data-scroll-target="#graphics">Graphics</a></li>
+  <li><a href="#r-basics" id="toc-r-basics" class="nav-link" data-scroll-target="#r-basics"><strong>R Basics</strong></a></li>
+  <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis"><strong>Exploratory Analysis</strong></a></li>
+  <li><a href="#graphics" id="toc-graphics" class="nav-link" data-scroll-target="#graphics"><strong>Graphics</strong></a></li>
   </ul></li>
-  <li><a href="#week-2" id="toc-week-2" class="nav-link" data-scroll-target="#week-2">Week 2</a>
+  <li><a href="#week-2" id="toc-week-2" class="nav-link" data-scroll-target="#week-2"><strong>Week 2</strong></a>
   <ul class="collapse">
-  <li><a href="#regression-models-assumptions-and-interpretation" id="toc-regression-models-assumptions-and-interpretation" class="nav-link" data-scroll-target="#regression-models-assumptions-and-interpretation">Regression Models: Assumptions and Interpretation</a></li>
+  <li><a href="#regression-models-assumptions-and-interpretation" id="toc-regression-models-assumptions-and-interpretation" class="nav-link" data-scroll-target="#regression-models-assumptions-and-interpretation"><strong>Regression Models: Assumptions and Interpretation</strong></a></li>
+  <li><a href="#get-your-eyes-in-residual-plots" id="toc-get-your-eyes-in-residual-plots" class="nav-link" data-scroll-target="#get-your-eyes-in-residual-plots"><strong>Get your Eyes in: Residual Plots</strong></a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -264,11 +265,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(robustbase)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="week-1" class="level2">
-<h2 class="anchored" data-anchor-id="week-1">Week 1</h2>
+<h2 class="anchored" data-anchor-id="week-1"><strong>Week 1</strong></h2>
 <section id="r-basics" class="level3">
-<h3 class="anchored" data-anchor-id="r-basics">R Basics</h3>
+<h3 class="anchored" data-anchor-id="r-basics"><strong>R Basics</strong></h3>
 <section id="na" class="level4">
-<h4 class="anchored" data-anchor-id="na">NA</h4>
+<h4 class="anchored" data-anchor-id="na"><strong>NA</strong></h4>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="images/NA1.png" class="img-fluid figure-img" width="800"></p>
@@ -282,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 <section id="nan" class="level4">
-<h4 class="anchored" data-anchor-id="nan">NaN</h4>
+<h4 class="anchored" data-anchor-id="nan"><strong>NaN</strong></h4>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="images/NaN1.png" class="img-fluid figure-img" width="800"></p>
@@ -291,9 +292,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 </section>
 <section id="exploratory-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="exploratory-analysis">Exploratory Analysis</h3>
+<h3 class="anchored" data-anchor-id="exploratory-analysis"><strong>Exploratory Analysis</strong></h3>
 <section id="galapagos-islands-data-species.data" class="level4">
-<h4 class="anchored" data-anchor-id="galapagos-islands-data-species.data">Galapagos Islands Data (species.data)</h4>
+<h4 class="anchored" data-anchor-id="galapagos-islands-data-species.data"><strong>Galapagos Islands Data (species.data)</strong></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>species.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"galapagos.dat"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -324,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 <section id="iris-data" class="level4">
-<h4 class="anchored" data-anchor-id="iris-data">Iris Data</h4>
+<h4 class="anchored" data-anchor-id="iris-data"><strong>Iris Data</strong></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -371,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 </section>
 <section id="graphics" class="level3">
-<h3 class="anchored" data-anchor-id="graphics">Graphics</h3>
+<h3 class="anchored" data-anchor-id="graphics"><strong>Graphics</strong></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.05</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
@@ -383,13 +384,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <section id="chickweight-data" class="level4">
-<h4 class="anchored" data-anchor-id="chickweight-data">ChickWeight Data</h4>
+<h4 class="anchored" data-anchor-id="chickweight-data"><strong>ChickWeight Data</strong></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ChickWeight <span class="ot">&lt;-</span> ChickWeight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="co2-data" class="level4">
-<h4 class="anchored" data-anchor-id="co2-data">CO2 Data</h4>
+<h4 class="anchored" data-anchor-id="co2-data"><strong>CO2 Data</strong></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>CO2 <span class="ot">&lt;-</span> CO2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -397,19 +398,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 </section>
 <section id="week-2" class="level2">
-<h2 class="anchored" data-anchor-id="week-2">Week 2</h2>
+<h2 class="anchored" data-anchor-id="week-2"><strong>Week 2</strong></h2>
 <section id="regression-models-assumptions-and-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="regression-models-assumptions-and-interpretation">Regression Models: Assumptions and Interpretation</h3>
+<h3 class="anchored" data-anchor-id="regression-models-assumptions-and-interpretation"><strong>Regression Models: Assumptions and Interpretation</strong></h3>
 <section id="deal-with-standard-errors" class="level4">
-<h4 class="anchored" data-anchor-id="deal-with-standard-errors">Deal With Standard Errors</h4>
+<h4 class="anchored" data-anchor-id="deal-with-standard-errors"><strong>Deal With Standard Errors</strong></h4>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="images/SD1.png" class="img-fluid figure-img" width="800"></p>
 </figure>
 </div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/SD2.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
 </section>
 <section id="standard-assumptions-of-the-linear-regression-model" class="level4">
-<h4 class="anchored" data-anchor-id="standard-assumptions-of-the-linear-regression-model">Standard Assumptions of the Linear Regression Model</h4>
+<h4 class="anchored" data-anchor-id="standard-assumptions-of-the-linear-regression-model"><strong>Standard Assumptions of the Linear Regression Model</strong></h4>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="images/Assumptions1.png" class="img-fluid figure-img" width="800"></p>
@@ -417,26 +423,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 <section id="iris-data-1" class="level4">
-<h4 class="anchored" data-anchor-id="iris-data-1">Iris Data</h4>
+<h4 class="anchored" data-anchor-id="iris-data-1"><strong>Iris Data</strong></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="model-0-no-intercept" class="level5">
-<h5 class="anchored" data-anchor-id="model-0-no-intercept">Model 0 (No Intercept)</h5>
+<h5 class="anchored" data-anchor-id="model-0-no-intercept"><strong>Model 0 (No Intercept)</strong></h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The coefficient estimates in the above model (no intercept) are just <u><strong>the sample means</strong></u>.</p>
 </section>
 <section id="model-1-intercept-included" class="level5">
-<h5 class="anchored" data-anchor-id="model-1-intercept-included">Model 1 (Intercept Included)</h5>
+<h5 class="anchored" data-anchor-id="model-1-intercept-included"><strong>Model 1 (Intercept Included)</strong></h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The intercept in the above model (intercept included) is the <u><strong>Setosa sample mean</strong></u>. The coefficient estimates are the <u><strong>differences</strong></u> between the <u><strong>respective means</strong></u> and the <u><strong>Setosa mean</strong></u>.</p>
 </section>
 <section id="model-2-sum-to-zero-constraint" class="level5">
-<h5 class="anchored" data-anchor-id="model-2-sum-to-zero-constraint">Model 2 (“Sum to Zero” Constraint)</h5>
+<h5 class="anchored" data-anchor-id="model-2-sum-to-zero-constraint"><strong>Model 2 (“Sum to Zero” Constraint)</strong></h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris, <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">Species =</span> <span class="st">"contr.sum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -446,14 +452,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The intercept in the above model (“sum to zero” constraint) is the <u><strong>overall mean</strong></u> petal length for all the iris flowers. The coefficients represent the <u><strong>differences</strong></u> between the <u><strong>respective means</strong></u> and the <u><strong>overall mean</strong></u>.</p>
 </section>
 <section id="model-3" class="level5">
-<h5 class="anchored" data-anchor-id="model-3">Model 3</h5>
+<h5 class="anchored" data-anchor-id="model-3"><strong>Model 3</strong></h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The intercept in the above model is <u><strong>the expected petal length for Setosa when the sepal length is zero</strong></u>.</p>
 </section>
 <section id="model-4-interaction-included" class="level5">
-<h5 class="anchored" data-anchor-id="model-4-interaction-included">Model 4 (Interaction Included)</h5>
+<h5 class="anchored" data-anchor-id="model-4-interaction-included"><strong>Model 4 (Interaction Included)</strong></h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length <span class="sc">+</span> Species<span class="sc">:</span>Sepal.Length, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -461,10 +467,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 </section>
 <section id="ustemps-data" class="level4">
-<h4 class="anchored" data-anchor-id="ustemps-data">UStemps Data</h4>
+<h4 class="anchored" data-anchor-id="ustemps-data"><strong>UStemps Data</strong></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ustemp <span class="ot">&lt;-</span> ustemp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"UStemps.rda"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>ustemp<span class="sc">$</span>longitude <span class="ot">&lt;-</span> <span class="sc">-</span>ustemp<span class="sc">$</span>longitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="model-1-base-model" class="level5">
+<h5 class="anchored" data-anchor-id="model-1-base-model"><strong>Model 1 (Base Model)</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude, <span class="at">data =</span> ustemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-2-quadratic-model" class="level5">
+<h5 class="anchored" data-anchor-id="model-2-quadratic-model"><strong>Model 2 (Quadratic Model)</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude <span class="sc">+</span> <span class="fu">I</span>(latitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(longitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> latitude<span class="sc">:</span>longitude, <span class="at">data =</span> ustemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="model-2-quadratic-model-diagnostics-plots" class="level6">
+<h6 class="anchored" data-anchor-id="model-2-quadratic-model-diagnostics-plots"><strong>Model 2 (Quadratic Model) Diagnostics Plots</strong></h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="fl">0.75</span>,<span class="dv">0</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Model2, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cook’s Distance plot shows three observations that may be influential, they are:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ustemp[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">13</span>, <span class="dv">52</span>), ]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 5: Los Angeles, CA</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 13: Miami, FL</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 52: Seattle, WA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="model-2rob-robust-fit-of-the-quadratic-model" class="level5">
+<h5 class="anchored" data-anchor-id="model-2rob-robust-fit-of-the-quadratic-model"><strong>Model 2Rob (Robust Fit of the Quadratic Model)</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Model2Rob <span class="ot">&lt;-</span> <span class="fu">lmrob</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude <span class="sc">+</span> <span class="fu">I</span>(latitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(longitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> latitude<span class="sc">:</span>longitude, <span class="at">data =</span> ustemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Note</strong>: the purpose of robust estimation is to try and <u><strong>include all of the observations</strong></u>, but to <u><strong>limit the extent</strong></u> to which any individual observation can influence the fit.</p>
+</section>
+</section>
+</section>
+<section id="get-your-eyes-in-residual-plots" class="level3">
+<h3 class="anchored" data-anchor-id="get-your-eyes-in-residual-plots"><strong>Get your Eyes in: Residual Plots</strong></h3>
+<section id="failures-of-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="failures-of-assumptions"><strong>Failures of Assumptions</strong></h4>
+<ul>
+<li><p><strong>Systematic structure in mean residuals</strong></p>
+<p>“Residuals vs Fitted Values” plot, or “Residuals vs Covariates” plot.</p>
+<p>Such structure indicates that the modelled representation of the regression function is inadequate. Whether this matters is context-specific: you may decide, for example, that the residuals are all so small that your model is already predicting well enough.</p></li>
+<li><p><strong>Non-constant variance</strong></p>
+<p>“Residuals vs Fitted Values” plot may exhibit a “funnel” shape (i.e.&nbsp;the residual variance seems higher at one end than the other).</p>
+<p>“Scale-Location” plot: the absolute residuals tend to be larger at one end than the other.</p>
+<p>In this case, the least-squares estimates are not fully efficient (i.e.&nbsp;you’re not making the best use of your data), and the <u><strong>reported standard errors will be incorrect</strong></u> — as will the <u><strong>results of any hypothesis tests and confidence interval calculations</strong></u>.</p></li>
+<li><p><strong>Non-normal residuals</strong></p>
+<p>“Normal Q-Q plot”: the residuals don’t fall roughly on a straight line.</p>
+<p>This is not critical in large samples, the exception is where you want to calculate prediction intervals for future observations: these will only be accurate if the future observations do indeed have an approximate normal distribution.</p></li>
+<li><p><strong>Lack of independence</strong></p>
+<p>Common situations in which it might be a problem are when data are collected at successive time points, or at a collection of spatial locations. Although none of the ‘standard’ plots is designed to check for this, lack of independence can lead to apparent structure in some of the residual plots. For example, if observations are collected sequentially in time and successive residuals are highly correlated, this can give the appearance of curvature in the “<u><strong>Residuals vs Fitted Values</strong></u>” plot: the curvature is not due to a nonlinear relationship between response and covariates, but simply due to the fact that <u><strong>neighbouring residuals are similar to each other because they are correlated</strong></u>.</p></li>
+</ul>
+</section>
+<section id="fix-the-problem" class="level4">
+<h4 class="anchored" data-anchor-id="fix-the-problem"><strong>Fix the Problem</strong></h4>
+<ul>
+<li><p><u><strong>Transform</strong></u> the response variable and / or covariate (but only if the resulting model makes scientific sense). Sometimes, a relationship can be made more linear by <u><strong>taking logs or square roots of one or more quantities</strong></u>; transforming the response variable can also help to make the residual variance more constant, and to make the assumption of normality more reasonable. Don’t take logs (or square roots) of quantities that could be negative, though!</p></li>
+<li><p><u><strong>Add additional terms to the model</strong></u>. For the temperature data for example, you might consider extending the quadratic model to include third-degree terms in latitude and longitude; or additional covariates such as altitude if these were available.</p></li>
+<li><p>If the diagnostics suggest that the <u><strong>residual variance is related to the fitted values</strong></u> (e.g.&nbsp;the ‘residuals versus fitted values’ plot has a funnel shape) and there is good reason to suspect that the responses follow <u><strong>non-normal distributions</strong></u> (e.g.&nbsp;because they are counts, so that Poisson distributions might be more appropriate) then a more general class of models may be appropriate — such as generalized linear models (GLMs).</p></li>
+</ul>
 
 
 </section>
