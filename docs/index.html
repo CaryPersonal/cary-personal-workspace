@@ -234,6 +234,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#basic-programming-techniques" id="toc-basic-programming-techniques" class="nav-link" data-scroll-target="#basic-programming-techniques"><strong>Basic Programming Techniques</strong></a></li>
   </ul></li>
+  <li><a href="#week-4" id="toc-week-4" class="nav-link" data-scroll-target="#week-4"><strong>Week 4</strong></a>
+  <ul class="collapse">
+  <li><a href="#function-minimisation" id="toc-function-minimisation" class="nav-link" data-scroll-target="#function-minimisation"><strong>Function Minimisation</strong></a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -580,7 +584,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 <section id="trapezium-function" class="level4">
-<h4 class="anchored" data-anchor-id="trapezium-function"><strong><code>trapezium()</code> function</strong></h4>
+<h4 class="anchored" data-anchor-id="trapezium-function"><strong><code>trapezium()</code> Function</strong></h4>
 <p>Create a function to approximate an integral using the trapezium rule with equally spaced x values.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>trapezium <span class="ot">&lt;-</span> <span class="cf">function</span>(v, a, b) {</span>
@@ -593,6 +597,101 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Use the above function to evaluate the integral <span class="math inline">\(\int_{1}^{5}arctan(x)dx\)</span> with 39 evaluation points (i.e.&nbsp;so that the input vector v has 39 elements).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trapezium</span>(<span class="fu">atan</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>,<span class="at">length.out =</span> <span class="dv">39</span>)), <span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="week-4" class="level2">
+<h2 class="anchored" data-anchor-id="week-4"><strong>Week 4</strong></h2>
+<section id="function-minimisation" class="level3">
+<h3 class="anchored" data-anchor-id="function-minimisation"><strong>Function Minimisation</strong></h3>
+<section id="newton-raphson-algorithm" class="level4">
+<h4 class="anchored" data-anchor-id="newton-raphson-algorithm"><strong>Newton-Raphson Algorithm</strong></h4>
+<p>Create a <code>QuarticMin()</code> function to minimise function <span class="math inline">\(h(x)=4x^2+5x+3\)</span>, with starting value <span class="math inline">\(x_0=-3\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>QuarticMin <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, <span class="at">tol =</span> <span class="fl">1e-6</span>, <span class="at">MaxIter =</span> <span class="dv">100</span>, <span class="at">Verbose =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x0</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  Iter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  dh.dx <span class="ot">&lt;-</span> (<span class="dv">8</span> <span class="sc">*</span> x) <span class="sc">+</span> <span class="dv">5</span> <span class="co"># First derivative</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  RelChange <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="fu">abs</span>(dh.dx) <span class="sc">&gt;</span> tol <span class="sc">&amp;</span> <span class="fu">abs</span>(RelChange) <span class="sc">&gt;</span> tol <span class="sc">&amp;</span> Iter <span class="sc">&lt;</span> MaxIter) {</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (Verbose) {</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Iteration"</span>,Iter,<span class="st">":   Estimate ="</span>,<span class="fu">signif</span>(x,<span class="dv">5</span>),</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"    Gradient = "</span>,<span class="fu">signif</span>(dh.dx,<span class="dv">5</span>),<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    x.old <span class="ot">&lt;-</span> x</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    d2h.dx2 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="co"># Second derivative</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x <span class="sc">-</span> (dh.dx <span class="sc">/</span> d2h.dx2)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    dh.dx <span class="ot">&lt;-</span> (<span class="dv">8</span> <span class="sc">*</span> x) <span class="sc">+</span> <span class="dv">5</span> <span class="co"># First derivative</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    RelChange <span class="ot">&lt;-</span> (x<span class="sc">-</span>x.old) <span class="sc">/</span> x.old</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    Iter <span class="ot">&lt;-</span> Iter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (Verbose) <span class="fu">cat</span>(<span class="st">"---</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  hmin <span class="ot">&lt;-</span> (<span class="dv">4</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> (<span class="dv">5</span> <span class="sc">*</span> x) <span class="sc">+</span> <span class="dv">3</span> <span class="co"># Original</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">x=</span>x, <span class="at">hx=</span>hmin, <span class="at">gradient=</span>dh.dx, <span class="at">N.iter=</span>Iter)</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="fu">QuarticMin</span>(<span class="sc">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tploglik-function" class="level4">
+<h4 class="anchored" data-anchor-id="tploglik-function"><strong><code>tploglik()</code> Function</strong></h4>
+<p>Create a <code>tploglik()</code> function to returns the negative log likelihood of a truncated Poisson distribution, up to a constant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>tploglik <span class="ot">&lt;-</span> <span class="cf">function</span>(theta, y) {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  n <span class="sc">*</span> (theta <span class="sc">-</span> (ybar <span class="sc">*</span> <span class="fu">log</span>(theta)) <span class="sc">+</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>theta)))</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Truncated Poisson Distribution Data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>TPdata <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">14</span>, <span class="fu">c</span>(<span class="dv">97</span>, <span class="dv">164</span>, <span class="dv">242</span>, <span class="dv">182</span>, <span class="dv">154</span>, <span class="dv">83</span>, <span class="dv">44</span>, <span class="dv">19</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use <code>nlm()</code> and <code>tploglik()</code> functions to find the maximum likelihood estimate of <span class="math inline">\(\theta\)</span> together with its estimated standard error. Use the sample mean of the original 1004 values as the starting point for <code>nlm()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>TP.fitted <span class="ot">&lt;-</span> <span class="fu">nlm</span>(tploglik, <span class="fu">mean</span>(TPdata), <span class="at">y =</span> TPdata, <span class="at">hessian =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">## The MLE of theta</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>TP.fitted<span class="sc">$</span>estimate</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Estimated Standard Error of the MLE</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(TP.fitted<span class="sc">$</span>hessian)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="non-linear-least-squares-estimates" class="level4">
+<h4 class="anchored" data-anchor-id="non-linear-least-squares-estimates">Non-linear Least Squares estimates</h4>
+<p>Data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>NLSdata <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">"nls2.dat"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Fit a linear model <strong>regressing <code>log(Y)</code> on <code>x</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>Model_Log <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Y) <span class="sc">~</span> x, <span class="at">data =</span> NLSdata)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model_Log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>sumsqerr()</code> function to compute sum of squared errors</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>sumsqerr <span class="ot">&lt;-</span> <span class="cf">function</span>(theta, x, Y) {</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  beta0 <span class="ot">&lt;-</span> theta[<span class="dv">1</span>]</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  beta1 <span class="ot">&lt;-</span> theta[<span class="dv">2</span>]</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> beta0 <span class="sc">*</span> <span class="fu">exp</span>(beta1 <span class="sc">*</span> x)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((Y <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For your nonlinear model, what is the sum of squared errors for the parameter values <span class="math inline">\(\beta_0=1.4\)</span>, <span class="math inline">\(\beta_1=-0.1\)</span>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sumsqerr</span>(<span class="fu">c</span>(<span class="fl">1.4</span>, <span class="sc">-</span><span class="fl">0.1</span>), <span class="at">x =</span> NLSdata<span class="sc">$</span>x, <span class="at">Y =</span> NLSdata<span class="sc">$</span>Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Try fitting your nonlinear model using <code>nlm()</code>, with starting values <span class="math inline">\(\beta_0=-0.8\)</span> and <span class="math inline">\(\beta_1=-0.6\)</span>. Compare the minimised sum of squares with the value that you obtained in the workshop starting from <span class="math inline">\(\beta_0=1.3\)</span> and <span class="math inline">\(\beta_1=-0.3\)</span>. Has <code>nlm()</code> located (approximately) the same minimum this time?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>NLS.fit1 <span class="ot">&lt;-</span> <span class="fu">nlm</span>(sumsqerr, <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.6</span>), <span class="at">x =</span> NLSdata<span class="sc">$</span>x, <span class="at">Y =</span> NLSdata<span class="sc">$</span>Y, <span class="at">hessian =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>NLS.fit2 <span class="ot">&lt;-</span> <span class="fu">nlm</span>(sumsqerr, <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="sc">-</span><span class="fl">0.3</span>), <span class="at">x =</span> NLSdata<span class="sc">$</span>x, <span class="at">Y =</span> NLSdata<span class="sc">$</span>Y, <span class="at">hessian =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Try fitting the model using <code>nlm()</code>, with starting values <span class="math inline">\(\beta_0=0.2\)</span> and <span class="math inline">\(\beta_1=0.4\)</span>. At the estimated minimum, what is the (2, 2) element of the Hessian matrix of the sum of squares?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>NLS.fit3 <span class="ot">&lt;-</span> <span class="fu">nlm</span>(sumsqerr, <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.4</span>), <span class="at">x =</span> NLSdata<span class="sc">$</span>x, <span class="at">Y =</span> NLSdata<span class="sc">$</span>Y, <span class="at">hessian =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>NLS.fit3<span class="sc">$</span>hessian[<span class="dv">2</span>, <span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
