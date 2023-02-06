@@ -25,11 +25,11 @@ website:
         href: https://carypersonal.github.io/cary-personal-workspace/
         text: "Cary's Personal Workspace"
       - icon: github
-        href: https://github.com/openscapes/quarto-website-tutorial
-        text: "Quarto website tutorial"
+        href: https://github.com/CaryPersonal/cary-personal-workspace.git
+        text: "GitHub Repo"
       - icon: twitter
-        href: https://twitter.com/openscapes
-        text: "Openscapes Twitter"         
+        href: https://twitter.com/Cary_Huang_
+        text: "Cary's Twitter"         
 
     style: "docked"
     search: true
