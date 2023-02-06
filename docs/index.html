@@ -224,6 +224,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis">Exploratory Analysis</a></li>
   <li><a href="#graphics" id="toc-graphics" class="nav-link" data-scroll-target="#graphics">Graphics</a></li>
   </ul></li>
+  <li><a href="#week-2" id="toc-week-2" class="nav-link" data-scroll-target="#week-2">Week 2</a>
+  <ul class="collapse">
+  <li><a href="#regression-models-assumptions-and-interpretation" id="toc-regression-models-assumptions-and-interpretation" class="nav-link" data-scroll-target="#regression-models-assumptions-and-interpretation">Regression Models: Assumptions and Interpretation</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -255,7 +259,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(robustbase)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="week-1" class="level2">
 <h2 class="anchored" data-anchor-id="week-1">Week 1</h2>
@@ -279,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 class="anchored" data-anchor-id="nan">NaN</h4>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="images/NaN1.png" class="img-fluid figure-img"></p>
+<p><img src="images/NaN1.png" class="img-fluid figure-img" width="800"></p>
 </figure>
 </div>
 </section>
@@ -344,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(iris<span class="sc">$</span>Petal.Length, <span class="at">INDEX =</span> iris<span class="sc">$</span>Species, <span class="at">FUN =</span> quantile, <span class="at">probs =</span> <span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Carry out a two-tailed t test, assuming equal variances, for a difference between the population mean petal widths for “versicolor” and “virginica” flowers.</p>
+<p>Carry out a two-tailed <em>t</em> test, assuming equal variances, for a difference between the population mean petal widths for “versicolor” and “virginica” flowers.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"versicolor"</span>],</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>       iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"virginica"</span>],</span>
@@ -386,6 +392,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 class="anchored" data-anchor-id="co2-data">CO2 Data</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>CO2 <span class="ot">&lt;-</span> CO2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="week-2" class="level2">
+<h2 class="anchored" data-anchor-id="week-2">Week 2</h2>
+<section id="regression-models-assumptions-and-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="regression-models-assumptions-and-interpretation">Regression Models: Assumptions and Interpretation</h3>
+<section id="deal-with-standard-errors" class="level4">
+<h4 class="anchored" data-anchor-id="deal-with-standard-errors">Deal With Standard Errors</h4>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/SD1.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+</section>
+<section id="standard-assumptions-of-the-linear-regression-model" class="level4">
+<h4 class="anchored" data-anchor-id="standard-assumptions-of-the-linear-regression-model">Standard Assumptions of the Linear Regression Model</h4>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Assumptions1.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+</section>
+<section id="iris-data-1" class="level4">
+<h4 class="anchored" data-anchor-id="iris-data-1">Iris Data</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="model-0-no-intercept" class="level5">
+<h5 class="anchored" data-anchor-id="model-0-no-intercept">Model 0 (No Intercept)</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The coefficient estimates in the above model (no intercept) are just <u><strong>the sample means</strong></u>.</p>
+</section>
+<section id="model-1-intercept-included" class="level5">
+<h5 class="anchored" data-anchor-id="model-1-intercept-included">Model 1 (Intercept Included)</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The intercept in the above model (intercept included) is the <u><strong>Setosa sample mean</strong></u>. The coefficient estimates are the <u><strong>differences</strong></u> between the <u><strong>respective means</strong></u> and the <u><strong>Setosa mean</strong></u>.</p>
+</section>
+<section id="model-2-sum-to-zero-constraint" class="level5">
+<h5 class="anchored" data-anchor-id="model-2-sum-to-zero-constraint">Model 2 (“Sum to Zero” Constraint)</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris, <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">Species =</span> <span class="st">"contr.sum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Species 1: Setosa</p>
+<p>Species 2: Versicolor</p>
+<p>Species 3: Virginica</p>
+<p>The intercept in the above model (“sum to zero” constraint) is the <u><strong>overall mean</strong></u> petal length for all the iris flowers. The coefficients represent the <u><strong>differences</strong></u> between the <u><strong>respective means</strong></u> and the <u><strong>overall mean</strong></u>.</p>
+</section>
+<section id="model-3" class="level5">
+<h5 class="anchored" data-anchor-id="model-3">Model 3</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The intercept in the above model is <u><strong>the expected petal length for Setosa when the sepal length is zero</strong></u>.</p>
+</section>
+<section id="model-4-interaction-included" class="level5">
+<h5 class="anchored" data-anchor-id="model-4-interaction-included">Model 4 (Interaction Included)</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length <span class="sc">+</span> Species<span class="sc">:</span>Sepal.Length, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The main effect coefficients for Versicolor and Virginica represent <u><strong>differences relative to Setosa</strong></u>. Two additional coefficients for the interactions represent <u><strong>differences</strong></u> in the <u><strong>slopes of the Petal.Length:Sepal.Length relationship</strong></u> for these two species, <u><strong>relative to the slope for Setosa flowers</strong></u>.</p>
+</section>
+</section>
+<section id="ustemps-data" class="level4">
+<h4 class="anchored" data-anchor-id="ustemps-data">UStemps Data</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ustemp <span class="ot">&lt;-</span> ustemp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

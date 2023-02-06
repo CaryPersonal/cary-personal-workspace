@@ -11,6 +11,8 @@ Required Packages
 library(Hmisc)
 library(RColorBrewer)
 library(ggplot2)
+library(maps)
+library(robustbase)
 ```
 
 ## Week 1
@@ -25,7 +27,7 @@ library(ggplot2)
 
 #### NaN
 
-![](images/NaN1.png){fig-align="left"}
+![](images/NaN1.png){fig-align="left" width="800"}
 
 ### Exploratory Analysis
 
@@ -108,7 +110,7 @@ Considering the petal lengths of the flowers, which of the three species has the
 tapply(iris$Petal.Length, INDEX = iris$Species, FUN = quantile, probs = 0.9)
 ```
 
-Carry out a two-tailed t test, assuming equal variances, for a difference between the population mean petal widths for "versicolor" and "virginica" flowers.
+Carry out a two-tailed *t* test, assuming equal variances, for a difference between the population mean petal widths for "versicolor" and "virginica" flowers.
 
 ```{r, eval=FALSE}
 t.test(iris$Petal.Width[iris$Species == "versicolor"],
@@ -152,4 +154,74 @@ ChickWeight <- ChickWeight
 
 ```{r, eval=FALSE}
 CO2 <- CO2
+```
+
+## Week 2
+
+### Regression Models: Assumptions and Interpretation
+
+#### Deal With Standard Errors
+
+![](images/SD1.png){fig-align="left" width="800"}
+
+#### Standard Assumptions of the Linear Regression Model
+
+![](images/Assumptions1.png){fig-align="left" width="800"}
+
+#### Iris Data
+
+```{r, eval=FALSE}
+iris <- iris
+```
+
+##### Model 0 (No Intercept)
+
+```{r, eval=FALSE}
+Model <- lm(Petal.Length ~ Species - 1, data = iris)
+```
+
+The coefficient estimates in the above model (no intercept) are just [**the sample means**]{.underline}.
+
+##### Model 1 (Intercept Included)
+
+```{r, eval=FALSE}
+Model <- lm(Petal.Length ~ Species, data = iris)
+```
+
+The intercept in the above model (intercept included) is the [**Setosa sample mean**]{.underline}. The coefficient estimates are the [**differences**]{.underline} between the [**respective means**]{.underline} and the [**Setosa mean**]{.underline}.
+
+##### Model 2 ("Sum to Zero" Constraint)
+
+```{r, eval=FALSE}
+Model <- lm(Petal.Length ~ Species, data = iris, contrasts = list(Species = "contr.sum"))
+```
+
+Species 1: Setosa
+
+Species 2: Versicolor
+
+Species 3: Virginica
+
+The intercept in the above model ("sum to zero" constraint) is the [**overall mean**]{.underline} petal length for all the iris flowers. The coefficients represent the [**differences**]{.underline} between the [**respective means**]{.underline} and the [**overall mean**]{.underline}.
+
+##### Model 3
+
+```{r, eval=FALSE}
+Model <- lm(Petal.Length ~ Species + Sepal.Length, data = iris)
+```
+
+The intercept in the above model is [**the expected petal length for Setosa when the sepal length is zero**]{.underline}.
+
+##### Model 4 (Interaction Included)
+
+```{r, eval=FALSE}
+Model <- lm(Petal.Length ~ Species + Sepal.Length + Species:Sepal.Length, data = iris)
+```
+
+The main effect coefficients for Versicolor and Virginica represent [**differences relative to Setosa**]{.underline}. Two additional coefficients for the interactions represent [**differences**]{.underline} in the [**slopes of the Petal.Length:Sepal.Length relationship**]{.underline} for these two species, [**relative to the slope for Setosa flowers**]{.underline}.
+
+#### UStemps Data
+
+```{r, eval=FALSE}
+ustemp <- ustemp
 ```
