@@ -17,7 +17,7 @@ website:
     left: "&copy; Cary, 2023"
     
   sidebar:
-    logo: "images/openscapes_hex.png"
+    logo: "images/workspace.jpg"
     pinned: true
     align: center
     tools: 
