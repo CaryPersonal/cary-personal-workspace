@@ -271,6 +271,8 @@ Model2Rob <- lmrob(min.temp ~ latitude + longitude + I(latitude^2) + I(longitude
 
 #### **Failures of Assumptions**
 
+The main things that can result in [**incorrect standard errors**]{.underline} are [**non-constant variance**]{.underline} and [**dependence between residuals**]{.underline}
+
 -   **Systematic structure in mean residuals**
 
     "Residuals vs Fitted Values" plot, or "Residuals vs Covariates" plot.
@@ -294,6 +296,10 @@ Model2Rob <- lmrob(min.temp ~ latitude + longitude + I(latitude^2) + I(longitude
 -   **Lack of independence**
 
     Common situations in which it might be a problem are when data are collected at successive time points, or at a collection of spatial locations. Although none of the 'standard' plots is designed to check for this, lack of independence can lead to apparent structure in some of the residual plots. For example, if observations are collected sequentially in time and successive residuals are highly correlated, this can give the appearance of curvature in the "[**Residuals vs Fitted Values**]{.underline}" plot: the curvature is not due to a nonlinear relationship between response and covariates, but simply due to the fact that [**neighbouring residuals are similar to each other because they are correlated**]{.underline}.
+
+#### **Influential Observations**
+
+Rule-of-thumb: observation influential if **Cook's distance** **exceeds** $\frac{8}{n-2k}$, where `k` is the number of coefficients estimated.
 
 #### **Fix the Problem**
 

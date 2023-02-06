@@ -124,6 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -513,6 +514,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="get-your-eyes-in-residual-plots"><strong>Get your Eyes in: Residual Plots</strong></h3>
 <section id="failures-of-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="failures-of-assumptions"><strong>Failures of Assumptions</strong></h4>
+<p>The main things that can result in <u><strong>incorrect standard errors</strong></u> are <u><strong>non-constant variance</strong></u> and <u><strong>dependence between residuals</strong></u></p>
 <ul>
 <li><p><strong>Systematic structure in mean residuals</strong></p>
 <p>“Residuals vs Fitted Values” plot, or “Residuals vs Covariates” plot.</p>
@@ -527,6 +529,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Lack of independence</strong></p>
 <p>Common situations in which it might be a problem are when data are collected at successive time points, or at a collection of spatial locations. Although none of the ‘standard’ plots is designed to check for this, lack of independence can lead to apparent structure in some of the residual plots. For example, if observations are collected sequentially in time and successive residuals are highly correlated, this can give the appearance of curvature in the “<u><strong>Residuals vs Fitted Values</strong></u>” plot: the curvature is not due to a nonlinear relationship between response and covariates, but simply due to the fact that <u><strong>neighbouring residuals are similar to each other because they are correlated</strong></u>.</p></li>
 </ul>
+</section>
+<section id="influential-observations" class="level4">
+<h4 class="anchored" data-anchor-id="influential-observations"><strong>Influential Observations</strong></h4>
+<p>Rule-of-thumb: observation influential if <strong>Cook’s distance</strong> <strong>exceeds</strong> <span class="math inline">\(\frac{8}{n-2k}\)</span>, where <code>k</code> is the number of coefficients estimated.</p>
 </section>
 <section id="fix-the-problem" class="level4">
 <h4 class="anchored" data-anchor-id="fix-the-problem"><strong>Fix the Problem</strong></h4>
