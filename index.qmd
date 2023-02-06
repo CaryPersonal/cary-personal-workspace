@@ -427,7 +427,7 @@ TP.fitted$estimate
 1 / sqrt(TP.fitted$hessian)
 ```
 
-#### Non-linear Least Squares estimates
+#### **Non-linear Least Squares estimates**
 
 Data
 
