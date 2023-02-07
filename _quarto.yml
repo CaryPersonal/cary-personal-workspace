@@ -6,7 +6,7 @@ execute:
   freeze: auto
   
 website:
-  favicon: favicon.ico
+  favicon: favicon.png
   page-navigation: true
   title: "Cary's Personal Workspace" 
   site-url: "https://carypersonal.github.io/cary-personal-workspace/" 
