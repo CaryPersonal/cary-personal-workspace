@@ -265,7 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="welcome" class="level1">
 <h1>STAT0023 ICA1 Quiz</h1>
-<p>Required Packages</p>
+<p><strong>Required Packages</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
@@ -288,6 +288,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="images/NA2.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/NA3.png" class="img-fluid figure-img" width="800"></p>
 </figure>
 </div>
 </section>
@@ -362,21 +367,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Carry out a two-tailed <em>t</em> test, assuming equal variances, for a difference between the population mean petal widths for “versicolor” and “virginica” flowers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"versicolor"</span>],</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>       iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"virginica"</span>],</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"versicolor"</span>],</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                 iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"virginica"</span>],</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result, <span class="at">digits =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Carry out an <em>F</em> test of the null hypothesis that the population variance of sepal lengths is the same for flowers of “setosa” and “virginica” species.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(iris<span class="sc">$</span>Sepal.Length[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"setosa"</span>],</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>         iris<span class="sc">$</span>Sepal.Length[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"virginica"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">var.test</span>(iris<span class="sc">$</span>Sepal.Length[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"setosa"</span>],</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                   iris<span class="sc">$</span>Sepal.Length[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"virginica"</span>])</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result, <span class="at">digits =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To three decimal places, what is the lower limit of a 90% confidence interval for the difference between the population mean petal widths for “versicolor” and “virginica” flowers?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"versicolor"</span>],</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"virginica"</span>],</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"versicolor"</span>],</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                 iris<span class="sc">$</span>Petal.Width[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"virginica"</span>],</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">conf.level =</span> <span class="fl">0.90</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result, <span class="at">digits =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -430,6 +438,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/Assumptions1.png" class="img-fluid figure-img" width="800"></p>
 </figure>
 </div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Assumptions2.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
 </section>
 <section id="iris-data-1" class="level4">
 <h4 class="anchored" data-anchor-id="iris-data-1"><strong>Iris Data</strong></h4>
@@ -439,21 +452,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="model-0-no-intercept" class="level5">
 <h5 class="anchored" data-anchor-id="model-0-no-intercept"><strong>Model 0 (No Intercept)</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> iris)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The coefficient estimates in the above model (no intercept) are just <u><strong>the sample means</strong></u>.</p>
 </section>
 <section id="model-1-intercept-included" class="level5">
 <h5 class="anchored" data-anchor-id="model-1-intercept-included"><strong>Model 1 (Intercept Included)</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The intercept in the above model (intercept included) is the <u><strong>Setosa sample mean</strong></u>. The coefficient estimates are the <u><strong>differences</strong></u> between the <u><strong>respective means</strong></u> and the <u><strong>Setosa mean</strong></u>.</p>
 </section>
 <section id="model-2-sum-to-zero-constraint" class="level5">
 <h5 class="anchored" data-anchor-id="model-2-sum-to-zero-constraint"><strong>Model 2 (“Sum to Zero” Constraint)</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris, <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">Species =</span> <span class="st">"contr.sum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris, <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">Species =</span> <span class="st">"contr.sum"</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Species 1: Setosa</p>
 <p>Species 2: Versicolor</p>
@@ -463,16 +479,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="model-3" class="level5">
 <h5 class="anchored" data-anchor-id="model-3"><strong>Model 3</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length, <span class="at">data =</span> iris)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The intercept in the above model is <u><strong>the expected petal length for Setosa when the sepal length is zero</strong></u>.</p>
 </section>
 <section id="model-4-interaction-included" class="level5">
 <h5 class="anchored" data-anchor-id="model-4-interaction-included"><strong>Model 4 (Interaction Included)</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length <span class="sc">+</span> Species<span class="sc">:</span>Sepal.Length, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species <span class="sc">+</span> Sepal.Length <span class="sc">+</span> Species<span class="sc">:</span>Sepal.Length, <span class="at">data =</span> iris)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The main effect coefficients for Versicolor and Virginica represent <u><strong>differences relative to Setosa</strong></u>. Two additional coefficients for the interactions represent <u><strong>differences</strong></u> in the <u><strong>slopes of the Petal.Length:Sepal.Length relationship</strong></u> for these two species, <u><strong>relative to the slope for Setosa flowers</strong></u>.</p>
+<p><u><strong>Note</strong></u>: Interactions have <u><strong>nothing to do with correlations</strong></u> between covariates: rather, they relate to the way in which the relationship between one covariate and the response varies with another covariate.</p>
 </section>
 </section>
 <section id="ustemps-data" class="level4">
@@ -484,13 +503,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="model-1-base-model" class="level5">
 <h5 class="anchored" data-anchor-id="model-1-base-model"><strong>Model 1 (Base Model)</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude, <span class="at">data =</span> ustemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude, <span class="at">data =</span> ustemp)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="model-2-quadratic-model" class="level5">
 <h5 class="anchored" data-anchor-id="model-2-quadratic-model"><strong>Model 2 (Quadratic Model)</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude <span class="sc">+</span> <span class="fu">I</span>(latitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(longitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> latitude<span class="sc">:</span>longitude, <span class="at">data =</span> ustemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude <span class="sc">+</span> <span class="fu">I</span>(latitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(longitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> latitude<span class="sc">:</span>longitude, <span class="at">data =</span> ustemp)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="model-2-quadratic-model-diagnostics-plots" class="level6">
 <h6 class="anchored" data-anchor-id="model-2-quadratic-model-diagnostics-plots"><strong>Model 2 (Quadratic Model) Diagnostics Plots</strong></h6>
@@ -512,7 +533,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="model-2rob-robust-fit-of-the-quadratic-model" class="level5">
 <h5 class="anchored" data-anchor-id="model-2rob-robust-fit-of-the-quadratic-model"><strong>Model 2Rob (Robust Fit of the Quadratic Model)</strong></h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Model2Rob <span class="ot">&lt;-</span> <span class="fu">lmrob</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude <span class="sc">+</span> <span class="fu">I</span>(latitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(longitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> latitude<span class="sc">:</span>longitude, <span class="at">data =</span> ustemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Model2Rob <span class="ot">&lt;-</span> <span class="fu">lmrob</span>(min.temp <span class="sc">~</span> latitude <span class="sc">+</span> longitude <span class="sc">+</span> <span class="fu">I</span>(latitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(longitude<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> latitude<span class="sc">:</span>longitude, <span class="at">data =</span> ustemp)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Model2Rob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Note</strong>: the purpose of robust estimation is to try and <u><strong>include all of the observations</strong></u>, but to <u><strong>limit the extent</strong></u> to which any individual observation can influence the fit.</p>
 </section>
@@ -633,6 +655,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="fu">QuarticMin</span>(<span class="sc">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><u><strong>Note</strong></u>: In Iteration <code>n</code>, Estimate = <span class="math inline">\(x_{n}\)</span>.</p>
 </section>
 <section id="tploglik-function" class="level4">
 <h4 class="anchored" data-anchor-id="tploglik-function"><strong><code>tploglik()</code> Function</strong></h4>

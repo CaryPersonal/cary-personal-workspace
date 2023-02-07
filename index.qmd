@@ -5,7 +5,7 @@ subtitle: "KEEP LEARNING!"
 
 # STAT0023 ICA1 Quiz {#welcome}
 
-Required Packages
+**Required Packages**
 
 ```{r, eval=FALSE}
 library(Hmisc)
@@ -24,6 +24,8 @@ library(robustbase)
 ![NA (Not Available): missing values; NaN (Not a Number): illegal operations](images/NA1.png){fig-align="left" width="800"}
 
 ![](images/NA2.png){fig-align="left" width="800"}
+
+![](images/NA3.png){fig-align="left" width="800"}
 
 #### **NaN**
 
@@ -113,25 +115,28 @@ tapply(iris$Petal.Length, INDEX = iris$Species, FUN = quantile, probs = 0.9)
 Carry out a two-tailed *t* test, assuming equal variances, for a difference between the population mean petal widths for "versicolor" and "virginica" flowers.
 
 ```{r, eval=FALSE}
-t.test(iris$Petal.Width[iris$Species == "versicolor"],
-       iris$Petal.Width[iris$Species == "virginica"],
-       var.equal = TRUE)
+result <- t.test(iris$Petal.Width[iris$Species == "versicolor"],
+                 iris$Petal.Width[iris$Species == "virginica"],
+                 var.equal = TRUE)
+print(result, digits = 8)
 ```
 
 Carry out an *F* test of the null hypothesis that the population variance of sepal lengths is the same for flowers of "setosa" and "virginica" species.
 
 ```{r, eval=FALSE}
-var.test(iris$Sepal.Length[iris$Species == "setosa"],
-         iris$Sepal.Length[iris$Species == "virginica"])
+result <- var.test(iris$Sepal.Length[iris$Species == "setosa"],
+                   iris$Sepal.Length[iris$Species == "virginica"])
+print(result, digits = 8)
 ```
 
 To three decimal places, what is the lower limit of a 90% confidence interval for the difference between the population mean petal widths for "versicolor" and "virginica" flowers?
 
 ```{r, eval=FALSE}
-t.test(iris$Petal.Width[iris$Species == "versicolor"],
-       iris$Petal.Width[iris$Species == "virginica"],
-       var.equal = TRUE,
-       conf.level = 0.90)
+result <- t.test(iris$Petal.Width[iris$Species == "versicolor"],
+                 iris$Petal.Width[iris$Species == "virginica"],
+                 var.equal = TRUE,
+                 conf.level = 0.90)
+print(result, digits = 8)
 ```
 
 ### **Graphics**
@@ -170,6 +175,8 @@ CO2 <- CO2
 
 ![](images/Assumptions1.png){fig-align="left" width="800"}
 
+![](images/Assumptions2.png){fig-align="left" width="800"}
+
 #### **Iris Data**
 
 ```{r, eval=FALSE}
@@ -180,6 +187,7 @@ iris <- iris
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species - 1, data = iris)
+summary(Model)
 ```
 
 The coefficient estimates in the above model (no intercept) are just [**the sample means**]{.underline}.
@@ -188,6 +196,7 @@ The coefficient estimates in the above model (no intercept) are just [**the samp
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species, data = iris)
+summary(Model)
 ```
 
 The intercept in the above model (intercept included) is the [**Setosa sample mean**]{.underline}. The coefficient estimates are the [**differences**]{.underline} between the [**respective means**]{.underline} and the [**Setosa mean**]{.underline}.
@@ -196,6 +205,7 @@ The intercept in the above model (intercept included) is the [**Setosa sample me
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species, data = iris, contrasts = list(Species = "contr.sum"))
+summary(Model)
 ```
 
 Species 1: Setosa
@@ -210,6 +220,7 @@ The intercept in the above model ("sum to zero" constraint) is the [**overall me
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species + Sepal.Length, data = iris)
+summary(Model)
 ```
 
 The intercept in the above model is [**the expected petal length for Setosa when the sepal length is zero**]{.underline}.
@@ -218,9 +229,12 @@ The intercept in the above model is [**the expected petal length for Setosa when
 
 ```{r, eval=FALSE}
 Model <- lm(Petal.Length ~ Species + Sepal.Length + Species:Sepal.Length, data = iris)
+summary(Model)
 ```
 
 The main effect coefficients for Versicolor and Virginica represent [**differences relative to Setosa**]{.underline}. Two additional coefficients for the interactions represent [**differences**]{.underline} in the [**slopes of the Petal.Length:Sepal.Length relationship**]{.underline} for these two species, [**relative to the slope for Setosa flowers**]{.underline}.
+
+[**Note**]{.underline}: Interactions have [**nothing to do with correlations**]{.underline} between covariates: rather, they relate to the way in which the relationship between one covariate and the response varies with another covariate.
 
 #### **UStemps Data**
 
@@ -233,12 +247,14 @@ ustemp$longitude <- -ustemp$longitude
 
 ```{r, eval=FALSE}
 Model1 <- lm(min.temp ~ latitude + longitude, data = ustemp)
+summary(Model1)
 ```
 
 ##### **Model 2 (Quadratic Model)**
 
 ```{r, eval=FALSE}
 Model2 <- lm(min.temp ~ latitude + longitude + I(latitude^2) + I(longitude^2) + latitude:longitude, data = ustemp)
+summary(Model2)
 ```
 
 ###### **Model 2 (Quadratic Model) Diagnostics Plots**
@@ -263,6 +279,7 @@ ustemp[c(5, 13, 52), ]
 
 ```{r, eval=FALSE}
 Model2Rob <- lmrob(min.temp ~ latitude + longitude + I(latitude^2) + I(longitude^2) + latitude:longitude, data = ustemp)
+summary(Model2Rob)
 ```
 
 **Note**: the purpose of robust estimation is to try and [**include all of the observations**]{.underline}, but to [**limit the extent**]{.underline} to which any individual observation can influence the fit.
@@ -395,6 +412,8 @@ QuarticMin <- function(x0, tol = 1e-6, MaxIter = 100, Verbose = TRUE) {
 
 QuarticMin(-3)
 ```
+
+[**Note**]{.underline}: In Iteration `n`, Estimate = $x_{n}$.
 
 #### **`tploglik()` Function**
 
