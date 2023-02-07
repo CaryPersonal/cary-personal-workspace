@@ -10,7 +10,7 @@ website:
   page-navigation: true
   title: "Cary's Personal Workspace" 
   site-url: "https://carypersonal.github.io/cary-personal-workspace/" 
-  repo-url: https://github.com/CaryPersonal/cary-personal-workspace.git 
+  repo-url: https://github.com/CaryPersonal 
   repo-actions: [edit, issue]
   
   page-footer:
@@ -52,8 +52,8 @@ website:
 format:
   html:
     theme:
-      light: [cosmo, theme.scss] # from https://github.com/sta210-s22/website/blob/main/_quarto.yml
-      dark: [cosmo, theme-dark.scss]
+      light: flatly # from https://github.com/sta210-s22/website/blob/main/_quarto.yml
+      dark: darkly
     code-copy: true
     code-overflow: wrap
     toc: true
