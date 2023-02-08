@@ -43,9 +43,9 @@ website:
       - section: UCL-Schoolwork/index.qmd
         text: UCL Schoolwork
         contents: 
-          - quarto-workflows/browser.md
-          - quarto-workflows/rstudio.qmd
-          - quarto-workflows/jupyter.md 
+          - UCL-Schoolwork/browser.md
+          - UCL-Schoolwork/rstudio.qmd
+          - UCL-Schoolwork/jupyter.md
       - learning-more.qmd
       - href: transition-from-rmarkdown.qmd
         text: Transition from Rmd
