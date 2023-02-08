@@ -38,7 +38,7 @@ website:
     contents:
       - href: index.qmd
         text: Welcome
-      - href: docs/Tools-and-Tips.qmd
+      - href: Tools-and-Tips.qmd
         text: Tools and Tips
       - section: quarto-workflows/index.qmd
         text: UCL Schoolwork
