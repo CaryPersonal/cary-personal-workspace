@@ -43,11 +43,11 @@ website:
       - section: UCL-Schoolwork/index.qmd
         text: UCL Schoolwork
         contents:
-          - href: UCL-Schoolwork/browser.md
+          - href: UCL-Schoolwork/STAT0023.qmd
             text: STAT0023
           - href: UCL-Schoolwork/rstudio.qmd
             text: STAT0024
-          - href: UCL-Schoolwork/jupyter.md
+          - href: UCL-Schoolwork/jupyter.qmd
             text: ECON0047
       - href: learning-more.qmd
         text: Learn more

@@ -1,0 +1,14 @@
+{
+  "hash": "b017fbda1f427cfc01a4df9ac7c70ea8",
+  "result": {
+    "markdown": "---\ntitle: STAT0023\nsubtitle: ACE your ICA!\nexecute: \n  eval: false\n---\n\n\n# STAT0023 ICA1 Quiz {#welcome}\n\n**Required Packages**\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(Hmisc)\nlibrary(RColorBrewer)\nlibrary(ggplot2)\nlibrary(maps)\nlibrary(robustbase)\n```\n:::\n\n\n## **Week 1**\n\n### **R Basics**\n\n#### **NA**\n\n![NA (Not Available): missing values; NaN (Not a Number): illegal operations](images/NA1.png){alt=\"NA (Not Available): missing values; NaN (Not a Number): illegal operations\" fig-align=\"left\" width=\"800\"}\n\n![](images/NA2.png){fig-align=\"left\" width=\"800\"}\n\n![](images/NA3.png){fig-align=\"left\" width=\"800\"}\n\n#### **NaN**\n\n![](images/NaN1.png){fig-align=\"left\" width=\"800\"}\n\n### **Exploratory Analysis**\n\n#### **Galapagos Islands Data (species.data)**\n\n\n::: {.cell}\n\n```{.r .cell-code}\nspecies.data <- read.table(\"galapagos.dat\", header = TRUE)\n```\n:::\n\n\nWhat is the name of the (smallest) / (second largest) Galapagos island in the dataset?\n\n\n::: {.cell}\n\n```{.r .cell-code}\n## the smallest\nrownames(species.data)[which.min(species.data$Area)]\n## the second largest\nrownames(species.data)[order(species.data$Area, decreasing = TRUE)[2]]\n```\n:::\n\n\nHow many plant species are there in total on the second largest Galapagos island in the dataset?\n\n\n::: {.cell}\n\n```{.r .cell-code}\nspecies.data$Species[order(species.data$Area, decreasing = TRUE)[2]]\n```\n:::\n\n\nWhat is the name of the island with a value of 25 for the Elevation variable?\n\n\n::: {.cell}\n\n```{.r .cell-code}\nrownames(species.data)[species.data$Elevation == 25]\n```\n:::\n\n\nHow many islands have fewer than 25 species in total?\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsum(species.data$Species < 25)\n```\n:::\n\n\nWhat is the estimated slope in a linear regression of Area upon Scruz?\n\n\n::: {.cell}\n\n```{.r .cell-code}\nModel <- lm(Area ~ Scruz, data = species.data)\nsummary(Model)\nprint(Model$coefficients, digits = 8)\n```\n:::\n\n\n#### \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

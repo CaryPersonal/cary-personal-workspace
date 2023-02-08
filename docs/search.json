@@ -82,5 +82,12 @@
     "title": "UCL Schoolwork",
     "section": "",
     "text": "UCL Portico"
+  },
+  {
+    "objectID": "UCL-Schoolwork/STAT0023.html",
+    "href": "UCL-Schoolwork/STAT0023.html",
+    "title": "STAT0023",
+    "section": "",
+    "text": "Required Packages\n\nlibrary(Hmisc)\nlibrary(RColorBrewer)\nlibrary(ggplot2)\nlibrary(maps)\nlibrary(robustbase)\n\n\n\n\n\n\n\n\n\n\nNA (Not Available): missing values; NaN (Not a Number): illegal operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies.data <- read.table(\"galapagos.dat\", header = TRUE)\n\nWhat is the name of the (smallest) / (second largest) Galapagos island in the dataset?\n\n## the smallest\nrownames(species.data)[which.min(species.data$Area)]\n## the second largest\nrownames(species.data)[order(species.data$Area, decreasing = TRUE)[2]]\n\nHow many plant species are there in total on the second largest Galapagos island in the dataset?\n\nspecies.data$Species[order(species.data$Area, decreasing = TRUE)[2]]\n\nWhat is the name of the island with a value of 25 for the Elevation variable?\n\nrownames(species.data)[species.data$Elevation == 25]\n\nHow many islands have fewer than 25 species in total?\n\nsum(species.data$Species < 25)\n\nWhat is the estimated slope in a linear regression of Area upon Scruz?\n\nModel <- lm(Area ~ Scruz, data = species.data)\nsummary(Model)\nprint(Model$coefficients, digits = 8)"
   }
 ]

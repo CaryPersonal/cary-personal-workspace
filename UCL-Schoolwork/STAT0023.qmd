@@ -1,0 +1,79 @@
+---
+title: STAT0023
+subtitle: ACE your ICA!
+execute: 
+  eval: false
+---
+
+# STAT0023 ICA1 Quiz {#welcome}
+
+**Required Packages**
+
+```{r, eval=FALSE}
+library(Hmisc)
+library(RColorBrewer)
+library(ggplot2)
+library(maps)
+library(robustbase)
+```
+
+## **Week 1**
+
+### **R Basics**
+
+#### **NA**
+
+![NA (Not Available): missing values; NaN (Not a Number): illegal operations](/images/NA1.png){alt="NA (Not Available): missing values; NaN (Not a Number): illegal operations" fig-align="left"}
+
+![](images/NA2.png){fig-align="left" width="800"}
+
+![](images/NA3.png){fig-align="left" width="800"}
+
+#### **NaN**
+
+![](images/NaN1.png){fig-align="left" width="800"}
+
+### **Exploratory Analysis**
+
+#### **Galapagos Islands Data (species.data)**
+
+```{r}
+species.data <- read.table("galapagos.dat", header = TRUE)
+```
+
+What is the name of the (smallest) / (second largest) Galapagos island in the dataset?
+
+```{r, eval=FALSE}
+## the smallest
+rownames(species.data)[which.min(species.data$Area)]
+## the second largest
+rownames(species.data)[order(species.data$Area, decreasing = TRUE)[2]]
+```
+
+How many plant species are there in total on the second largest Galapagos island in the dataset?
+
+```{r, eval=FALSE}
+species.data$Species[order(species.data$Area, decreasing = TRUE)[2]]
+```
+
+What is the name of the island with a value of 25 for the Elevation variable?
+
+```{r, eval=FALSE}
+rownames(species.data)[species.data$Elevation == 25]
+```
+
+How many islands have fewer than 25 species in total?
+
+```{r, eval=FALSE}
+sum(species.data$Species < 25)
+```
+
+What is the estimated slope in a linear regression of Area upon Scruz?
+
+```{r, eval=FALSE}
+Model <- lm(Area ~ Scruz, data = species.data)
+summary(Model)
+print(Model$coefficients, digits = 8)
+```
+
+#### 
