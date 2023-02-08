@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://carypersonal.github.io/cary-personal-workspace/index.html</loc>
-    <lastmod>2023-02-08T16:25:23.362Z</lastmod>
+    <lastmod>2023-02-08T16:34:00.727Z</lastmod>
   </url>
   <url>
     <loc>https://carypersonal.github.io/cary-personal-workspace/explore.html</loc>
@@ -10,10 +10,14 @@
   </url>
   <url>
     <loc>https://carypersonal.github.io/cary-personal-workspace/Tools-and-Tips.html</loc>
-    <lastmod>2023-02-08T01:06:30.551Z</lastmod>
+    <lastmod>2023-02-08T16:33:10.343Z</lastmod>
   </url>
   <url>
     <loc>https://carypersonal.github.io/cary-personal-workspace/quarto-workflows/index.html</loc>
     <lastmod>2023-02-08T16:28:57.928Z</lastmod>
+  </url>
+  <url>
+    <loc>https://carypersonal.github.io/cary-personal-workspace/UCL-Schoolwork/index.html</loc>
+    <lastmod>2023-02-08T16:33:09.999Z</lastmod>
   </url>
 </urlset>
