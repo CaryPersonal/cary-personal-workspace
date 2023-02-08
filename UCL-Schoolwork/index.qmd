@@ -5,4 +5,4 @@ execute:
   eval: false
 ---
 
-This is a test page.
+![UCL Portico](images/UCL%20Portico.jpeg){fig-align="center"}
