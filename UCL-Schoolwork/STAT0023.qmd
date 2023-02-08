@@ -75,5 +75,3 @@ Model <- lm(Area ~ Scruz, data = species.data)
 summary(Model)
 print(Model$coefficients, digits = 8)
 ```
-
-#### 
