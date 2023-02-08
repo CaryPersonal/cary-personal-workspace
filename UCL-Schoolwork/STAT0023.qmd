@@ -9,7 +9,7 @@ execute:
 
 **Required Packages**
 
-```{r, eval=FALSE}
+```{r}
 library(Hmisc)
 library(RColorBrewer)
 library(ggplot2)
