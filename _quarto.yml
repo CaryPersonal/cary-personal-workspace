@@ -41,6 +41,7 @@ website:
       - href: Tools-and-Tips.qmd
         text: Tools and Tips
       - section: quarto-workflows/index.qmd
+        text: Test
         contents: 
           - quarto-workflows/browser.md
           - quarto-workflows/rstudio.qmd
