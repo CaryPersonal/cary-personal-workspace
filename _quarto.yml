@@ -19,7 +19,7 @@ website:
     
   sidebar:
     logo: "images/workspace.jpg"
-    pinned: true
+    pinned: false
     align: center
     tools: 
       - icon: globe
@@ -42,11 +42,15 @@ website:
         text: Tools and Tips
       - section: UCL-Schoolwork/index.qmd
         text: UCL Schoolwork
-        contents: 
-          - UCL-Schoolwork/browser.md
-          - UCL-Schoolwork/rstudio.qmd
-          - UCL-Schoolwork/jupyter.md
-      - learning-more.qmd
+        contents:
+          - href: UCL-Schoolwork/browser.md
+          - text: STAT0023
+          - href: UCL-Schoolwork/rstudio.qmd
+          - text: STAT0024
+          - href: UCL-Schoolwork/jupyter.md
+          - text: ECON0047
+      - href: learning-more.qmd
+      - text: Learn more
       - href: transition-from-rmarkdown.qmd
         text: Transition from Rmd
 
