@@ -1,6 +1,8 @@
 ---
 title: "Cary's Personal Workspace"
 subtitle: "KEEP LEARNING!"
+execute: 
+  eval: false
 ---
 
 # STAT0023 ICA1 Quiz {#welcome}
@@ -35,7 +37,7 @@ library(robustbase)
 
 #### **Galapagos Islands Data (species.data)**
 
-```{r, eval=FALSE}
+```{r}
 species.data <- read.table("galapagos.dat", header = TRUE)
 ```
 
