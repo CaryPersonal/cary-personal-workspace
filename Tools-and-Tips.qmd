@@ -13,7 +13,7 @@ execute:
 
 If iCloud gets stuck during the uploading process (never finish uploading), open the [**terminal**]{.underline} and try the following:
 
-```{.python filename="Terminal"}
+``` {.python filename="Terminal"}
 killall bird
 killall cloudd
 ```
