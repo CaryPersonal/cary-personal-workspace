@@ -40,5 +40,12 @@
     "title": "Tools and Tips",
     "section": "",
     "text": "If iCloud gets stuck during the upload process (never finish uploading), open the terminal and try the following:\nkillall bird\nkillall cloudd"
+  },
+  {
+    "objectID": "Tools-and-Tips.html",
+    "href": "Tools-and-Tips.html",
+    "title": "Tools and Tips",
+    "section": "",
+    "text": "If iCloud gets stuck during the upload process (never finish uploading), open the terminal and try the following:\nkillall bird\nkillall cloudd"
   }
 ]
