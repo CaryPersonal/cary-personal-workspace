@@ -23,15 +23,15 @@ library(robustbase)
 
 #### **NA**
 
-![NA (Not Available): missing values; NaN (Not a Number): illegal operations](/images/NA1.png){alt="NA (Not Available): missing values; NaN (Not a Number): illegal operations" fig-align="left"}
+![NA (Not Available): missing values; NaN (Not a Number): illegal operations](/images/NA1.png){alt="NA (Not Available): missing values; NaN (Not a Number): illegal operations" fig-align="left" width="800"}
 
-![](images/NA2.png){fig-align="left" width="800"}
+![](/images/NA2.png){fig-align="left" width="800"}
 
-![](images/NA3.png){fig-align="left" width="800"}
+![](/images/NA3.png){fig-align="left" width="800"}
 
 #### **NaN**
 
-![](images/NaN1.png){fig-align="left" width="800"}
+![](/images/NaN1.png){fig-align="left" width="800"}
 
 ### **Exploratory Analysis**
 
