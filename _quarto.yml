@@ -38,14 +38,14 @@ website:
     contents:
       - href: index.qmd
         text: Welcome
-      - href: Tools-and-Tips.qmd
+      - href: docs/Tools-and-Tips.qmd
         text: Tools and Tips
-      - section: UCL-Schoolwork/index.qmd
+      - section: quarto-workflows/index.qmd
         text: UCL Schoolwork
         contents: 
-          - UCL-Schoolwork/browser.md
-          - UCL-Schoolwork/rstudio.qmd
-          - UCL-Schoolwork/jupyter.md
+          - quarto-workflows/browser.md
+          - quarto-workflows/rstudio.qmd
+          - quarto-workflows/jupyter.md
       - learning-more.qmd
       - href: transition-from-rmarkdown.qmd
         text: Transition from Rmd
