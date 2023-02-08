@@ -45,9 +45,9 @@ website:
         contents:
           - href: UCL-Schoolwork/STAT0023.qmd
             text: STAT0023
-          - href: UCL-Schoolwork/rstudio.qmd
+          - href: UCL-Schoolwork/STAT0024.qmd
             text: STAT0024
-          - href: UCL-Schoolwork/jupyter.qmd
+          - href: UCL-Schoolwork/ECON0047.qmd
             text: ECON0047
       - href: learning-more.qmd
         text: Learn more
