@@ -40,7 +40,7 @@ website:
         text: Welcome
       - href: Tools-and-Tips.qmd
         text: Tools and Tips
-      - section: quarto-workflows/index.qmd
+      - section: UCL-Schoolwork/index.qmd
         text: UCL Schoolwork
         contents: 
           - quarto-workflows/browser.md
