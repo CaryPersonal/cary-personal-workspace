@@ -1,0 +1,16 @@
+---
+title: "MATH0050 Review Note"
+subtitle: "Important concepts & takeaways from exercises"
+---
+
+# Chapter 1 Language
+
+## 1.1 First Order Predicate Language
+
+The `symbols` which we will use to construct our language consist of:
+
+![](images/image-558609035.png){fig-alt="Definition of symbols" fig-align="left"}
+
+### Definition 1.1 Formulae
+
+![](images/image-1094387067.png){fig-alt="Definition of Formulae"}

@@ -208,5 +208,12 @@
     "title": "From RStudio",
     "section": "Troubleshooting",
     "text": "Troubleshooting\nIf you have trouble rendering your website after for example changing the extenstion of a file from .md to .qmd, refreshing your RStudio often helps. Do this by clicking the project name at the upper right of the RStudio window (in this case, quarto-website-tutorial), and underneath the “close project” section, click the same name of your project: quarto-website-tutorial. This will relaunch your whole project afresh."
+  },
+  {
+    "objectID": "UCL-Schoolwork/MATH0050.html",
+    "href": "UCL-Schoolwork/MATH0050.html",
+    "title": "MATH0050 Review Note",
+    "section": "",
+    "text": "The symbols which we will use to construct our language consist of:"
   }
 ]
