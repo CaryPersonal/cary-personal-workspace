@@ -5,11 +5,25 @@ execute:
   eval: false
 ---
 
-# Apple Products
+# **Creativity**
 
-## Mac
+::: panel-tabset
+## **Figures, Icons**
 
-### iCloud
+[Unsplash](https://unsplash.com/): Beautiful free images & pictures.
+
+[ICONS8](https://icons8.com/): Collections of good icons.
+
+## Videos
+
+## Voices
+:::
+
+# **Apple Products**
+
+## **Mac**
+
+### **iCloud**
 
 If iCloud gets stuck during the uploading process (never finish uploading), open the [**terminal**]{.underline} and try the following:
 
