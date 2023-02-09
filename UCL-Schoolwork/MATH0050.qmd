@@ -1,6 +1,5 @@
 ---
 title: "MATH0050 Review Note"
-subtitle: "Important concepts & takeaways from exercises"
 ---
 
 # Chapter 1 Language
@@ -14,3 +13,15 @@ The `symbols` which we will use to construct our language consist of:
 ### Definition 1.1 Formulae
 
 ![](images/image-1094387067.png){fig-alt="Definition of Formulae"}
+
+#### Examples
+
+![](images/image-2051659059.png){fig-alt="Formulae examples"}
+
+### Definition 1.5 The Degree of a Formula
+
+![](images/image-453010752.png){fig-alt="Degree definition"}
+
+#### Examples
+
+![](images/image-785851294.png)
