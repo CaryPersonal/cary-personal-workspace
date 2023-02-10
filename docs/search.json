@@ -46,7 +46,7 @@
     "href": "Tools-and-Tips.html",
     "title": "Tools and Tips",
     "section": "",
-    "text": "Figures, IconsVideosVoices\n\n\nUnsplash: Beautiful free images & pictures.\nICONS8: Collections of good icons."
+    "text": "GraphicsVideosVoices\n\n\nUnsplash: Beautiful free images & pictures.\nICONS8: Collections of good icons."
   },
   {
     "objectID": "quarto-workflows/index.html",
@@ -222,5 +222,12 @@
     "title": "Tools and Tips",
     "section": "Mac",
     "text": "Mac\n\niCloud\nIf iCloud gets stuck during the uploading process (never finish uploading), open the terminal and try the following:\n\n\nTerminal\n\nkillall bird\nkillall cloudd\n\nThe codes above will terminate the core process of file synchronization, and the process will start again automatically after a few seconds."
+  },
+  {
+    "objectID": "Tools-and-Tips.html#apple-products",
+    "href": "Tools-and-Tips.html#apple-products",
+    "title": "Tools and Tips",
+    "section": "Apple Products",
+    "text": "Apple Products\n\nMac\n\niCloud\nIf iCloud gets stuck during the uploading process (never finish uploading), open the terminal and try the following:\n\n\nTerminal\n\nkillall bird\nkillall cloudd\n\nThe codes above will terminate the core process of file synchronization, and the process will start again automatically after a few seconds."
   }
 ]
