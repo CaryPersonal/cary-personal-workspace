@@ -37,3 +37,9 @@ killall cloudd
 ```
 
 The codes above will terminate the core process of file synchronization, and the process will start again automatically after a few seconds.
+
+### iPhone
+
+#### 截屏选择\"拷贝并删除\"后，键盘卡死
+
+只需要再随意截屏一次即可，上一张拷贝了的截屏仍然会在剪贴板里，且可正常粘贴。

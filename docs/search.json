@@ -228,6 +228,6 @@
     "href": "Tools-and-Tips.html#apple-products",
     "title": "Tools and Tips",
     "section": "Apple Products",
-    "text": "Apple Products\n\nMac\n\niCloud\nIf iCloud gets stuck during the uploading process (never finish uploading), open the terminal and try the following:\n\n\nTerminal\n\nkillall bird\nkillall cloudd\n\nThe codes above will terminate the core process of file synchronization, and the process will start again automatically after a few seconds."
+    "text": "Apple Products\n\nMac\n\niCloud\nIf iCloud gets stuck during the uploading process (never finish uploading), open the terminal and try the following:\n\n\nTerminal\n\nkillall bird\nkillall cloudd\n\nThe codes above will terminate the core process of file synchronization, and the process will start again automatically after a few seconds.\n\n\n\niPhone\n\n截屏选择\"拷贝并删除\"后，键盘卡死\n只需要再随意截屏一次即可，上一张拷贝了的截屏仍然会在剪贴板里，且可正常粘贴。"
   }
 ]
