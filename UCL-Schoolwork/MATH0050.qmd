@@ -49,3 +49,7 @@ The `symbols` which we will use to construct our language consist of:
 ![](images/image-278639044.png)
 
 ![](images/image-1114518425.png)
+
+# To Be Arranged Later
+
+![](images/Basic%20rules%20for%20propositional%20semantic%20tableaux.png){fig-align="left"}
