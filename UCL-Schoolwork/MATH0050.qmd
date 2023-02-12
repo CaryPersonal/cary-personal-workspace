@@ -67,3 +67,7 @@ The `symbols` which we will use to construct our language consist of:
 ### **Theorem 2.30 (Deduction Theorem for Propositional Logic)**
 
 ![](images/image-124523939.png)
+
+### **Lemma 2.31**
+
+![](images/image-1090001939.png)
