@@ -52,4 +52,14 @@ The `symbols` which we will use to construct our language consist of:
 
 # To Be Arranged Later
 
+### **Basic Rules for Propositional Semantic Tableaux**
+
 ![](images/Basic%20rules%20for%20propositional%20semantic%20tableaux.png){fig-align="left"}
+
+### **Axioms for Proofs in Propositional Logic**
+
+![](images/image-460584132.png)
+
+### **A Rule of Deduction (Modus Ponens)**
+
+![](images/image-1302618482.png)
