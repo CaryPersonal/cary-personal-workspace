@@ -1,0 +1,45 @@
+---
+title: "Tools and Tips"
+subtitle: "NO MORE getting stuck!"
+execute: 
+  eval: false
+---
+
+# **Tools**
+
+## **Creativity**
+
+::: panel-tabset
+## **Graphics**
+
+[Unsplash](https://unsplash.com/): Beautiful free images & pictures.
+
+[ICONS8](https://icons8.com/): Collections of good icons.
+
+## Videos
+
+## Voices
+:::
+
+# **Tips**
+
+## **Apple Products**
+
+### **Mac**
+
+#### **iCloud**
+
+If iCloud gets stuck during the uploading process (never finish uploading), open the [**terminal**]{.underline} and try the following:
+
+``` {.python filename="Terminal"}
+killall bird
+killall cloudd
+```
+
+The codes above will terminate the core process of file synchronization, and the process will start again automatically after a few seconds.
+
+### iPhone
+
+#### 截屏选择\"拷贝并删除\"后，键盘卡死
+
+只需要再随意截屏一次即可，上一张拷贝了的截屏仍然会在剪贴板里，且可正常粘贴。

@@ -1,0 +1,11 @@
+{
+  "hash": "cc95626947a9fc0e9eb1a55d9b1a2953",
+  "result": {
+    "markdown": "---\ntitle: \"Tools and Tips\"\nsubtitle: \"NO MORE getting stuck!\"\n---\n\n# Apple Products\n\n## Mac\n\n### iCloud\n\nIf iCloud gets stuck during the upload process (never finish uploading), open the [**terminal**]{.underline} and try the following:\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\n2\n```\n:::\n:::\n\n\nkillall bird\n\nkillall cloudd\n\n",
+    "supporting": [
+      "Tools-and-Tips_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

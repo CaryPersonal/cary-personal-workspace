@@ -1,0 +1,73 @@
+---
+title: "MATH0050 Review Note"
+---
+
+# **Chapter 1 Language**
+
+## **1.1 First Order Predicate Language**
+
+The `symbols` which we will use to construct our language consist of:
+
+![](images/image-558609035.png){fig-alt="Definition of symbols" fig-align="left"}
+
+### **Definition 1.1 Formulae**
+
+![](images/image-1094387067.png){fig-alt="Definition of Formulae"}
+
+#### **Examples**
+
+![](images/image-2051659059.png){fig-alt="Formulae examples"}
+
+### **Definition 1.5 The Degree of a Formula**
+
+![](images/image-453010752.png){fig-alt="Degree definition"}
+
+#### **Examples**
+
+![](images/image-785851294.png)
+
+### **Definition 1.7 The Weight of a String**
+
+![](images/image-418888794.png)
+
+#### **Examples**
+
+![](images/image-1819370675.png)
+
+### **Proposition 1.8 The Weight of a Formula**
+
+![](images/image-880436097.png)
+
+![](images/image-1823451496.png)
+
+### **Proposition 1.10 Proper Initial Segment of a Formula**
+
+![](images/image-504780429.png)
+
+## **1.2 Conventional Functional First Order Predicate Language**
+
+![](images/image-278639044.png)
+
+![](images/image-1114518425.png)
+
+# To Be Arranged Later
+
+### **Basic Rules for Propositional Semantic Tableaux**
+
+![](images/Basic%20rules%20for%20propositional%20semantic%20tableaux.png){fig-align="left"}
+
+### **Axioms for Proofs in Propositional Logic**
+
+![](images/image-460584132.png)
+
+### **A Rule of Deduction (Modus Ponens)**
+
+![](images/image-1302618482.png)
+
+### **Theorem 2.30 (Deduction Theorem for Propositional Logic)**
+
+![](images/image-124523939.png)
+
+### **Lemma 2.31**
+
+![](images/image-1090001939.png)
