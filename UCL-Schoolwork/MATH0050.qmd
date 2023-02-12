@@ -63,3 +63,7 @@ The `symbols` which we will use to construct our language consist of:
 ### **A Rule of Deduction (Modus Ponens)**
 
 ![](images/image-1302618482.png)
+
+### **Theorem 2.30 (Deduction Theorem for Propositional Logic)**
+
+![](images/image-124523939.png)
