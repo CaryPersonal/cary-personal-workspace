@@ -7,9 +7,9 @@ execute:
 
 # Important DDLs {#welcome}
 
-| **Subject**                               | **Due Date**                         |
-|----------------------------|-------------------------------|
-| MATH0050 Exercise Set A                   | 23:59, Monday, 20 February 2023      |
-| STAT0023 ICA1 Take-home Component         | 12:00 Noon, Monday, 20 February 2023 |
-| STAT0024 Coursework 1                     | 16:00, Tuesday, 21 February 2023     |
-| Cambridge MPhil in Management Application | 23:59, Friday, 24 February 2023      |
+| **Subject**                               | **Due Date**                         | Status          |
+|----------------------------|-------------------------------|--------------|
+| MATH0050 Exercise Set A                   | 23:59, Monday, 20 February 2023      | **In Progress** |
+| STAT0023 ICA1 Take-home Component         | 12:00 Noon, Monday, 20 February 2023 |                 |
+| STAT0024 Coursework 1                     | 16:00, Tuesday, 21 February 2023     |                 |
+| Cambridge MPhil in Management Application | 23:59, Friday, 24 February 2023      |                 |
