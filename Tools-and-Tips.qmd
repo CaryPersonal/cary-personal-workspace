@@ -18,6 +18,8 @@ execute:
 
 ## **Graphics**
 
+[DALL·E](https://labs.openai.com/): Generate images from natural language descriptions.
+
 [Unsplash](https://unsplash.com/): Beautiful free images & pictures.
 
 [ICONS8](https://icons8.com/): Collections of good icons.
