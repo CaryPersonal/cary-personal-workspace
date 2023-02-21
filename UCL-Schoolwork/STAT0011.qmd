@@ -38,10 +38,9 @@ haemophilia gene. The parameter of interest θ can take two states:
 
 2.  The data Y is the number of the woman\'s sons who are infected. Suppose she has two sons, neither of whom is affected. Assuming the status of the two sons is independent, write down the likelihood function p(Y\|θ) (if the woman is not a carrier then her sons cannot be affected, but if she is a carrier they each have a 50% chance of being effected).
 
-![](images/image-482102431.png)
-
-				
-			
-		
+    ![](images/image-1711161989.png)
+    				
+    			
+    		
 
 	

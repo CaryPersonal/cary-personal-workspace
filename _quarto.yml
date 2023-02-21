@@ -43,7 +43,7 @@ website:
       - section: UCL-Schoolwork/index.qmd
         text: UCL Schoolwork
         contents:
-          - href: UCL-Schoolwork/STAT0023.qmd
+          - href: UCL-Schoolwork/STAT0011.qmd
             text: STAT0011
           - href: UCL-Schoolwork/STAT0023.qmd
             text: STAT0023
