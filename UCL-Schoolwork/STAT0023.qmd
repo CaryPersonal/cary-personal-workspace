@@ -493,3 +493,113 @@ Try fitting the model using `nlm()`, with starting values $\beta_0=0.2$ and $\be
 NLS.fit3 <- nlm(sumsqerr, c(0.2, 0.4), x = NLSdata$x, Y = NLSdata$Y, hessian = TRUE)
 NLS.fit3$hessian[2, 2]
 ```
+
+## **Week 6**
+
+### **Generalized Linear Models (GLMs)**
+
+#### **Table of means, variance functions and dispersion parameters for some common distributions in the exponential family**
+
+![](images/image-117798365.png)
+
+#### **Galapagos Islands Data (galapagos.data)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+galapagos.data <- read.table("galapagos.dat")
+```
+
+##### **Model 1 (GLM with log link)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+galapagos.glm1 <- glm(Endemics ~ log(Area), 
+                      family = poisson(link = "log"),
+                      data = galapagos.data)
+summary(galapagos.glm1)
+```
+
+In this case, the model says that Y\[i\] (number of endemics for the ith island) comes from a [Poisson distribution with mean mu\[i\]]{.underline}, where
+
+log(mu\[i\]) = beta0 + (beta1 \* x\[i\])
+
+and [x\[i\] is the log of the area of the ith island]{.underline}. The coefficients in the output are estimates of beta0 and beta1 respectively.
+
+Notice also the "**Null deviance**" (this is the deviance - or **lack of fit** - for a model **containing just a constant term**, analogous to the total sum of squares in a linear regression model), and the "**Residual deviance**" (the lack of fit for the model you've just fitted, analagous to the residual sum of squares). The residual deviance is **much lower** than the null deviance, suggesting that the model has **"explained" a lot of the variation** - just as you would say that a linear regression model explains a lot of the variation if the residual sum of squares is much lower than the total sum of squares.
+
+Finally, notice the AIC (Akaike Information Criterion). This is another measure of "model fit", a really good model will have a high log-likelihood with few parameters. **The lower the AIC, the better the model**.
+
+###### **Residual plots of Model 1 (GLM with log link)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow = c(2,2), lwd = 2, mar = c(3,3,2,2), mgp = c(2,0.75,0))
+plot(galapagos.glm1, which = 1:4)
+```
+
+The Cook's distance plot shows that there are some islands which do potentially have a **big influence on the results**; and there are also several residuals outside the range **-2 to 2** (look at the "residuals vs fitted" plot).
+
+This suggests that the endemic [species counts are more variable than we would expect from a Poisson distribution]{.underline}. This phenomenon is called **overdispersion**. One possible explanation is that [there are other factors in addition to island area that influence the number of endemic species]{.underline}. This is quite likely, in fact.
+
+The next question is: what might those other factors be? And do we have the data?! The variables in the include "`Nearest`" (distance to the nearest other island in km) and "`Adjacent`" (the area of the nearest other island in km\^2). It seems reasonable to imagine that if the nearest other island is very close by, then it is easy for species to move between islands and therefore that the number of endemics is likely to be lower. Let's see whether there's any evidence for that.
+
+##### **Model 2 (Model 1 + `Nearest`)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+galapagos.glm2 <- update(galapagos.glm1, . ~ . + Nearest)
+summary(galapagos.glm2)
+```
+
+According to the z test, the `Nearest` variable is not quite significant at 5% level.
+
+Do a chi-squared test to compare `Model 1` and `Model 2` :
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+anova(galapagos.glm1, galapagos.glm2, test="Chi")
+```
+
+The chi-squared test result suggests that we **can reject the null hypothesis** at the 5% level! Actually, the [anova() results are usually more accurate]{.underline} than the z tests in the summary() output - however, in this particular instance everything seems too close to call.
+
+It is also possible that the number of endemics is influenced by the size of the neighbouring island - but this probably won't make much difference if that island is 200km away! This suggests adding the variable `Adjacent` to the model, as well as an **interaction between** `Adjacent` **and** `Nearest`.
+
+##### **Model 3 (Model 2 + `Adjacent` + `Adjacent:Nearest`)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+galapagos.glm3 <- update(galapagos.glm2, . ~ . + Adjacent + Adjacent:Nearest)
+summary(galapagos.glm3)
+```
+
+Do another chi-squared test to compare `Model 2` and `Model 3` :
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+anova(galapagos.glm2, galapagos.glm3, test = "Chi")
+```
+
+###### **Residual plots of Model 3 (Model 2 + `Adjacent` + `Adjacent:Nearest`)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow = c(2,2), lwd = 2, mar = c(3,3,2,2), mgp = c(2,0.75,0))
+plot(galapagos.glm3, which = 1:4)
+```
+
+Well ... there are still several residuals outside the range (-2,2). As a check on this, let's calculate the variance of the Pearson residuals - which, for a **Poisson model**, are defined in such a way that if the model is correct their **mean and variance should be roughly 0 and 1 respectively** (see workshop notes). When calculating their variance, we need to account for the number of parameters estimated in the model - so we can't just use the var() command directly.
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+sum(resid(galapagos.glm3, type = "pearson")^2 ) / galapagos.glm3$df.residual
+```
+
+That's not even close to 1! Conclusion: we haven't succeeded in explaining the excess variation. This means that [all of the existing test results, confidence intervals and so forth will be incorrect]{.underline} because they are calculated under the assumption that the variance is equal to the mean. There isn't much that we can do to improve the model further, but there is a trick that we can use to at least ensure that the test results are correct. This is to introduce a "dummy" **dispersion parameter** into the Poisson model, which just [allows all of the standard errors to be increased to acknowledge the additional variability in the data]{.underline}.
+
+R allows this via the use of a "**quasipoisson**" family of distributions (there is also a "**quasibinomial**" family, that can be used for **overdispersed** binomial data). Be aware that there is no such thing in reality as a "quasiPoisson" or "quasibinomial" distribution: they are provided here solely because it is quite common to encounter **overdispersion** in applications, and the inclusion of a "dummy" dispersion parameter provides an easy (and legitimate!) way to ensure that standard errors etc. are correct. Here we go:
+
+##### **Model 4 (Model 3 with family changed to quasipoission)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+galapagos.glm4 <- update(galapagos.glm3, family = quasipoisson(link = "log"))
+summary(galapagos.glm4)
+```
+
+Notice that the **AIC** is reported as `NA`. This is because the AIC requires a log-likelihood, and the log-likelihood is computed from the probability density or probability mass function of the fitted model, and there is no such thing as "the probability mass function of a quasiPoisson distribution". You might reasonably ask "how can you estimate the parameters by maximum likelihood then?" The answer - at least, for the purposes of this course - is: the parameters are estimated as though the data follow a [Poisson distribution]{.underline}, and then [the "dummy" dispersion parameter is introduced afterwards]{.underline}.
+
+We can't use the anova() command to compare the quasipoisson model with any of the earlier models: it can only be used to compare nested models [within the same distributional "family"]{.underline}. However, if you call anova() with just a single model then it carries out a sequence of tests as though you **built up the model in stages, at each stage adding one extra term**. Like this (notice the use of `test="F"`, because we now have a dispersion parameter).
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+anova(galapagos.glm4, test = "F")
+```
