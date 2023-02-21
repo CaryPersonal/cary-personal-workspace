@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cary’s Personal Workspace - UCL Schoolwork</title>
+<title>Cary’s Personal Workspace - STAT0011</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,8 +29,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../UCL-Schoolwork/STAT0023.html" rel="next">
-<link href="../Tools-and-Tips.html" rel="prev">
 <link href="../favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -72,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">UCL Schoolwork</h1>
+      <h1 class="quarto-secondary-nav-title">STAT0011</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -113,12 +111,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../UCL-Schoolwork/index.html" class="sidebar-item-text sidebar-link active">UCL Schoolwork</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="../UCL-Schoolwork/index.html" class="sidebar-item-text sidebar-link">UCL Schoolwork</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../UCL-Schoolwork/STAT0023.html" class="sidebar-item-text sidebar-link">STAT0023</a>
@@ -161,15 +159,28 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#week-1-bayesian-inference" id="toc-week-1-bayesian-inference" class="nav-link active" data-scroll-target="#week-1-bayesian-inference"><strong>Week 1 Bayesian Inference</strong></a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><strong>Exercise 1</strong></a>
+  <ul class="collapse">
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><strong>Question 1</strong></a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><strong>Question 2</strong></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/edit/main/UCL-Schoolwork/STAT0011.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/CaryPersonal/cary-personal-workspace.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">UCL Schoolwork</h1>
-<p class="subtitle lead">KEEP LEARNING!</p>
+<h1 class="title d-none d-lg-block">STAT0011</h1>
+<p class="subtitle lead">Decision and Risk</p>
 </div>
 
 
@@ -184,14 +195,36 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/UCL Portico.jpeg" class="img-fluid figure-img" width="800"></p>
-<p></p><figcaption class="figure-caption">UCL Portico</figcaption><p></p>
-</figure>
-</div>
+<section id="week-1-bayesian-inference" class="level1">
+<h1><strong>Week 1 Bayesian Inference</strong></h1>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1"><strong>Exercise 1</strong></h2>
+<section id="question-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-1"><strong>Question 1</strong></h3>
+<p>You are planning a vacation in Italy. Before packing, you hear that there might be an earthquake the day you arrive.</p>
+<p>After consulting Google, you learn that in recent years there have been (on average) five earthquakes a year in the part of the country you are visiting (ignore leap years). Moreover, you learn that when there is an earthquake, the earthquake forecast service has correctly predicted it 90% of the time. However, when there was no earthquake, the forecast service incorrectly predicted 10% of the time that there would be one.</p>
+<p><u>What is the probability that there will be an earthquake on the day you arrive given forecast of an earthquake?</u></p>
+<p><img src="images/image-297229950.png" class="img-fluid"></p>
+</section>
+<section id="question-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-2"><strong>Question 2</strong></h3>
+<p>Consider a woman who has a brother with haemophilia, but whose father does not have haemophilia. This implies that her mother must be a carrier of the haemophilia gene on one of her X chromosomes and that her father is not a carrier. The woman herself thus has a fifty-fifty chance of having the gene.</p>
+<p>The situation involving uncertainty is whether or not the woman carries the haemophilia gene. The parameter of interest θ can take two states:</p>
+<ul>
+<li><p>Carries the gene (θ = 1)</p></li>
+<li><p>Does not carry the gene (θ = 0)</p></li>
+</ul>
+<ol type="1">
+<li><p>Write down the prior distribution for θ using the above information.</p>
+<p><img src="images/image-1001256580.png" class="img-fluid"></p></li>
+<li><p>The data Y is the number of the woman's sons who are infected. Suppose she has two sons, neither of whom is affected. Assuming the status of the two sons is independent, write down the likelihood function p(Y|θ) (if the woman is not a carrier then her sons cannot be affected, but if she is a carrier they each have a 50% chance of being effected).</p></li>
+</ol>
+<p><img src="images/image-482102431.png" class="img-fluid"></p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -442,18 +475,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../Tools-and-Tips.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tools and Tips</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../UCL-Schoolwork/STAT0023.html" class="pagination-link">
-        <span class="nav-page-text">STAT0011</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

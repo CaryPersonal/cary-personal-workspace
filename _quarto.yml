@@ -44,6 +44,8 @@ website:
         text: UCL Schoolwork
         contents:
           - href: UCL-Schoolwork/STAT0023.qmd
+            text: STAT0011
+          - href: UCL-Schoolwork/STAT0023.qmd
             text: STAT0023
           - href: UCL-Schoolwork/STAT0024.qmd
             text: STAT0024
