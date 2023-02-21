@@ -5,16 +5,17 @@ execute:
   eval: false
 ---
 
-# STAT0023 ICA1 Quiz {#welcome}
+# STAT0023 Review Notes {#welcome}
 
 **Required Packages**
 
-```{r}
+```{r, eval=TRUE, echo=FALSE, warning=FALSE}
 library(Hmisc)
 library(RColorBrewer)
 library(ggplot2)
 library(maps)
 library(robustbase)
+library(mgcv) # for gam()
 ```
 
 ## **Week 1**
@@ -540,6 +541,28 @@ This suggests that the endemic [species counts are more variable than we would e
 
 The next question is: what might those other factors be? And do we have the data?! The variables in the include "`Nearest`" (distance to the nearest other island in km) and "`Adjacent`" (the area of the nearest other island in km\^2). It seems reasonable to imagine that if the nearest other island is very close by, then it is easy for species to move between islands and therefore that the number of endemics is likely to be lower. Let's see whether there's any evidence for that.
 
+To help understand the model that you've just fitted, let's pretend that all the assumptions are satisfied so that it makes sense to plot the fitted relationship - together with some confidence intervals, perhaps. Here goes:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+x.grid <- seq(min(galapagos.data$Area),
+              max(galapagos.data$Area), by = 0.1)
+Endemics.pred <- predict(galapagos.glm1,
+                         newdata = data.frame(Area = x.grid),
+                         se.fit = TRUE)
+
+z <- qnorm(0.975, mean = 0, sd = 1, lower.tail = TRUE)
+UL95 <- Endemics.pred$fit + (z*Endemics.pred$se.fit)
+LL95 <- Endemics.pred$fit - (z*Endemics.pred$se.fit)
+
+par(mfrow = c(1,1))
+plot(galapagos.data$Area, galapagos.data$Endemics, col = "lightblue",
+     pch = 15,log = "x",xlab = expression("Island area (km"^2*")"),ylab = "# endemics",
+     main = "Galapagos islands: numbers of endemic species")
+lines(x.grid,exp(Endemics.pred$fit),col="blue")
+lines(x.grid,exp(UL95),lty=2,col="blue")
+lines(x.grid,exp(LL95),lty=2,col="blue")
+```
+
 ##### **Model 2 (Model 1 + `Nearest`)**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
@@ -690,3 +713,5 @@ lines(x.grid, 1 - exp(-exp(Beetle.pred$fit)), col="red")
 lines(x.grid, 1 - exp(-exp(UL95)), lty=2, col="red")
 lines(x.grid, 1 - exp(-exp(LL95)), lty=2, col="red")
 ```
+
+### **Generalized Additive Models (GAMs)**
