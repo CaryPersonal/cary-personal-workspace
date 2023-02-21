@@ -9,13 +9,15 @@ execute:
 
 **Required Packages**
 
-```{r, eval=TRUE, echo=FALSE, warning=FALSE}
-library(Hmisc)
-library(RColorBrewer)
-library(ggplot2)
-library(maps)
-library(robustbase)
-library(mgcv) # for gam()
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+suppressPackageStartupMessages({
+  library(Hmisc)
+  library(RColorBrewer)
+  library(ggplot2)
+  library(maps)
+  library(robustbase)
+  library(mgcv) # for gam()
+})
 ```
 
 ## **Week 1**
@@ -715,3 +717,72 @@ lines(x.grid, 1 - exp(-exp(LL95)), lty=2, col="red")
 ```
 
 ### **Generalized Additive Models (GAMs)**
+
+#### **Terrorist Attacks Data**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+YearlyAttacks <- read.csv("terrorism.dat", header = TRUE, sep = ";")
+CountryData <- read.csv("countries.dat", header = TRUE, sep = ";")
+YearlyAttacks <- merge(YearlyAttacks, CountryData, all = TRUE)
+YearlyAttacks <- YearlyAttacks[order(YearlyAttacks$Year, YearlyAttacks$Country),] # Reorder the data
+```
+
+Look at the USA data:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+wanted.rows <- grepl("United States",YearlyAttacks$Country, fixed = TRUE)
+USAttacks <- YearlyAttacks[wanted.rows,]
+
+par(lwd = 2, mar = c(3,3,2,2), mgp = c(2,0.75,0))
+plot(USAttacks$Year, USAttacks$Freq, type = "l",col = "red",
+     xlab = "Year",ylab = "Number of attacks",
+     main = "Terrorist attacks in the USA, 1968-2009")
+```
+
+##### **Model 1 (Poisson GAM with log link)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+UStrends <- gam(Freq ~ s(Year), family = poisson(link = "log"),
+                data = USAttacks)
+summary(UStrends)
+```
+
+That's not very informative, except that it tells us that the smooth function of "Year" is highly significant (let's face it, this was obvious already!). Notice the use of `s(Year)` to represent [a "smooth function of Year"]{.underline}. The `edf` in the `summary()` output is "effective degrees of freedom", which is a [measure of the complexity of the fitted curve]{.underline}.
+
+Check for overdispersion:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+sum(resid(UStrends,type = "pearson")^2) / UStrends$df.residual
+```
+
+Not close to 1! Let's do a quasipoisson fit, therefore:
+
+##### **Model 2 (quasipoisson GAM with log link)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+UStrends2 <- update(UStrends, family = quasipoisson(link = "log"))
+summary(UStrends2)
+```
+
+In contrast to the GLM example for the Galapagos endemics, you'll notice here that the **coefficients** in the summary() output **do change a bit**. This is related to the way that the smoothing parameter is selected automatically. Almost all of the strange things about GAMs are related to this, in fact.
+
+Plot the estimates of the smooth function:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+plot(UStrends)
+```
+
+If we really want to show what the model tells us about trends in US terror attacks, we can do it using the `predict()` command, in exactly the same way that we did for the Galapagos endemics example. Like this:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+eta.predicted <- predict(UStrends2, se.fit = TRUE)
+z <- qnorm(0.975, mean = 0, sd = 1, lower.tail = TRUE)
+UL95 <- eta.predicted$fit + (z * eta.predicted$se.fit)
+LL95 <- eta.predicted$fit - (z * eta.predicted$se.fit)
+plot(USAttacks$Year, USAttacks$Freq, type = "p",col = "red",pch=15,
+     xlab = "Year",ylab = "Number of attacks",
+     main = "Terrorist attacks in the USA, 1968-2009")
+lines(USAttacks$Year, exp(eta.predicted$fit), col = "darkred")
+lines(USAttacks$Year, exp(UL95), col = "darkred", lty = 2)
+lines(USAttacks$Year, exp(LL95), col = "darkred", lty = 2)
+```
