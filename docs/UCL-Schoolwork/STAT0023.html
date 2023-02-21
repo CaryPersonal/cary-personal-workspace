@@ -740,8 +740,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 class="anchored" data-anchor-id="table-of-means-variance-functions-and-dispersion-parameters-for-some-common-distributions-in-the-exponential-family"><strong>Table of means, variance functions and dispersion parameters for some common distributions in the exponential family</strong></h4>
 <p><img src="images/image-117798365.png" class="img-fluid"></p>
 </section>
-<section id="galapagos-islands-data-galapagos.data" class="level4">
-<h4 class="anchored" data-anchor-id="galapagos-islands-data-galapagos.data"><strong>Galapagos Islands Data (galapagos.data)</strong></h4>
+<section id="galapagos-islands-data-poisson-glm" class="level4">
+<h4 class="anchored" data-anchor-id="galapagos-islands-data-poisson-glm"><strong>Galapagos Islands Data (Poisson GLM)</strong></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>galapagos.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"galapagos.dat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -974,8 +974,178 @@ Nearest:Adjacent  1     2.05        25      91.90   0.5957   0.44746
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="beetle-mortality-data-binomial-glm" class="level4">
+<h4 class="anchored" data-anchor-id="beetle-mortality-data-binomial-glm"><strong>Beetle Mortality Data (Binomial GLM)</strong></h4>
+<section id="three-commonly-used-link-functions-and-their-inverse-functions-for-the-binomial-distribution" class="level5">
+<h5 class="anchored" data-anchor-id="three-commonly-used-link-functions-and-their-inverse-functions-for-the-binomial-distribution"><strong>Three commonly used link functions and their inverse functions for the binomial distribution</strong></h5>
+<p><img src="images/image-1757126326.png" class="img-fluid"></p>
+<p><img src="images/image-599157655.png" class="img-fluid"></p>
+</section>
+<section id="define-the-data" class="level5">
+<h5 class="anchored" data-anchor-id="define-the-data">Define the data:</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>logdose <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.6907</span>, <span class="fl">1.7242</span>, <span class="fl">1.7552</span>, <span class="fl">1.7842</span>, <span class="fl">1.8113</span>, <span class="fl">1.8369</span>, <span class="fl">1.8610</span>, <span class="fl">1.8839</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>totals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">59</span>, <span class="dv">60</span>, <span class="dv">62</span>, <span class="dv">56</span>, <span class="dv">63</span>, <span class="dv">59</span>, <span class="dv">62</span>, <span class="dv">60</span>)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>killed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">13</span>, <span class="dv">18</span>, <span class="dv">28</span>, <span class="dv">52</span>, <span class="dv">53</span>, <span class="dv">61</span>, <span class="dv">60</span>)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>proportions <span class="ot">&lt;-</span> killed <span class="sc">/</span> totals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-1-binomial-glm-with-logit-link" class="level5">
+<h5 class="anchored" data-anchor-id="model-1-binomial-glm-with-logit-link"><strong>Model 1 (Binomial GLM with logit link)</strong></h5>
+<p>Notice the “weights” argument: When using glm() with binomial data, this is needed to specify the values of “n” for each observation (if you think about it, an observed proportion from a group containing n=1000 insects will be more accurate than a proportion from a group containing just n=10 insects.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>beetle.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(proportions <span class="sc">~</span> logdose, <span class="at">weights =</span> totals, </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(beetle.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = proportions ~ logdose, family = binomial(link = "logit"), 
+    weights = totals)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.5941  -0.3944   0.8329   1.2592   1.5940  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -60.717      5.181  -11.72   &lt;2e-16 ***
+logdose       34.270      2.912   11.77   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 284.202  on 7  degrees of freedom
+Residual deviance:  11.232  on 6  degrees of freedom
+AIC: 41.43
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<section id="diagnostics-of-model-1" class="level6">
+<h6 class="anchored" data-anchor-id="diagnostics-of-model-1"><strong>Diagnostics of Model 1</strong></h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="fl">0.75</span>,<span class="dv">0</span>))</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beetle.glm, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="STAT0023_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="model-2-binomial-glm-with-probit-link" class="level5">
+<h5 class="anchored" data-anchor-id="model-2-binomial-glm-with-probit-link"><strong>Model 2 (Binomial GLM with probit link)</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>beetle.glm.probit <span class="ot">&lt;-</span> <span class="fu">glm</span>(proportions <span class="sc">~</span> logdose, <span class="at">weights =</span> totals,</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">"probit"</span>) )</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(beetle.glm.probit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = proportions ~ logdose, family = binomial(link = "probit"), 
+    weights = totals)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.5714  -0.4703   0.7501   1.0632   1.3449  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -34.935      2.648  -13.19   &lt;2e-16 ***
+logdose       19.728      1.487   13.27   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 284.20  on 7  degrees of freedom
+Residual deviance:  10.12  on 6  degrees of freedom
+AIC: 40.318
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<section id="diagnostics-of-model-2" class="level6">
+<h6 class="anchored" data-anchor-id="diagnostics-of-model-2"><strong>Diagnostics of Model 2</strong></h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="fl">0.75</span>,<span class="dv">0</span>))</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beetle.glm.probit, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="STAT0023_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="model-3-binomial-glm-with-complementary-log-log-link" class="level5">
+<h5 class="anchored" data-anchor-id="model-3-binomial-glm-with-complementary-log-log-link"><strong>Model 3 (Binomial GLM with complementary log-log link)</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>beetle.glm.cloglog <span class="ot">&lt;-</span> <span class="fu">glm</span>(proportions <span class="sc">~</span> logdose, <span class="at">weights =</span> totals,</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">"cloglog"</span>) )</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(beetle.glm.cloglog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = proportions ~ logdose, family = binomial(link = "cloglog"), 
+    weights = totals)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.80329  -0.55135   0.03089   0.38315   1.28883  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -39.572      3.240  -12.21   &lt;2e-16 ***
+logdose       22.041      1.799   12.25   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 284.2024  on 7  degrees of freedom
+Residual deviance:   3.4464  on 6  degrees of freedom
+AIC: 33.644
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<section id="diagnostics-of-model-3" class="level6">
+<h6 class="anchored" data-anchor-id="diagnostics-of-model-3"><strong>Diagnostics of Model 3</strong></h6>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="fl">0.75</span>,<span class="dv">0</span>))</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beetle.glm.cloglog, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="STAT0023_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Seems that <code>Model 3</code> is better than the other two.</p>
+<p>Produce a plot of the fitted dose-response curve with some confidence intervals using <code>Model 3</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>x.grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">1.6</span>, <span class="fl">1.9</span>, <span class="fl">0.01</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>Beetle.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(beetle.glm.cloglog, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">logdose =</span> x.grid), <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>, <span class="at">mean =</span> <span class="dv">0</span>,<span class="at">sd =</span> <span class="dv">1</span>,<span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>UL95 <span class="ot">&lt;-</span> Beetle.pred<span class="sc">$</span>fit <span class="sc">+</span> (z <span class="sc">*</span> Beetle.pred<span class="sc">$</span>se.fit)</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>LL95 <span class="ot">&lt;-</span> Beetle.pred<span class="sc">$</span>fit <span class="sc">-</span> (z <span class="sc">*</span> Beetle.pred<span class="sc">$</span>se.fit)</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(logdose, proportions,</span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(log[<span class="dv">10</span>]<span class="sc">*</span><span class="st">" CS"</span>[<span class="dv">2</span>]<span class="sc">*</span><span class="st">" concentration (mg\ l"</span><span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}<span class="sc">*</span><span class="st">")"</span>),</span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion"</span>,<span class="at">main =</span> <span class="st">"Proportion of insects killed"</span>,</span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"salmon"</span>,<span class="at">pch =</span> <span class="dv">15</span>)</span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x.grid, <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">exp</span>(Beetle.pred<span class="sc">$</span>fit)), <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb78-15"><a href="#cb78-15" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x.grid, <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">exp</span>(UL95)), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb78-16"><a href="#cb78-16" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x.grid, <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">exp</span>(LL95)), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="STAT0023_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 </section>

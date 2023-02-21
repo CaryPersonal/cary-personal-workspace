@@ -502,7 +502,7 @@ NLS.fit3$hessian[2, 2]
 
 ![](images/image-117798365.png)
 
-#### **Galapagos Islands Data (galapagos.data)**
+#### **Galapagos Islands Data (Poisson GLM)**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 galapagos.data <- read.table("galapagos.dat")
@@ -602,4 +602,91 @@ We can't use the anova() command to compare the quasipoisson model with any of t
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 anova(galapagos.glm4, test = "F")
+```
+
+#### **Beetle Mortality Data (Binomial GLM)**
+
+##### **Three commonly used link functions and their inverse functions for the binomial distribution**
+
+![](images/image-1757126326.png)
+
+![](images/image-599157655.png)
+
+##### Define the data:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+logdose <- c(1.6907, 1.7242, 1.7552, 1.7842, 1.8113, 1.8369, 1.8610, 1.8839)
+totals <- c(59, 60, 62, 56, 63, 59, 62, 60)
+killed <- c(6, 13, 18, 28, 52, 53, 61, 60)
+proportions <- killed / totals
+```
+
+##### **Model 1 (Binomial GLM with logit link)**
+
+Notice the "weights" argument: When using glm() with binomial data, this is needed to specify the values of "n" for each observation (if you think about it, an observed proportion from a group containing n=1000 insects will be more accurate than a proportion from a group containing just n=10 insects.
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+beetle.glm <- glm(proportions ~ logdose, weights = totals, 
+                  family = binomial(link = "logit"))
+summary(beetle.glm)
+```
+
+###### **Diagnostics of Model 1**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow = c(2,2), lwd = 2, mar = c(3,3,2,2), mgp = c(2,0.75,0))
+plot(beetle.glm, which = 1:4)
+```
+
+##### **Model 2 (Binomial GLM with probit link)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+beetle.glm.probit <- glm(proportions ~ logdose, weights = totals,
+                         family=binomial(link="probit") )
+summary(beetle.glm.probit)
+```
+
+###### **Diagnostics of Model 2**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow = c(2,2), lwd = 2, mar = c(3,3,2,2), mgp = c(2,0.75,0))
+plot(beetle.glm.probit, which = 1:4)
+```
+
+##### **Model 3 (Binomial GLM with complementary log-log link)**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+beetle.glm.cloglog <- glm(proportions ~ logdose, weights = totals,
+                         family=binomial(link="cloglog") )
+summary(beetle.glm.cloglog)
+```
+
+###### **Diagnostics of Model 3**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow = c(2,2), lwd = 2, mar = c(3,3,2,2), mgp = c(2,0.75,0))
+plot(beetle.glm.cloglog, which = 1:4)
+```
+
+Seems that `Model 3` is better than the other two.
+
+Produce a plot of the fitted dose-response curve with some confidence intervals using `Model 3`:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+x.grid <- seq(1.6, 1.9, 0.01)
+Beetle.pred <- predict(beetle.glm.cloglog, newdata = data.frame(logdose = x.grid), se.fit = TRUE)
+
+z <- qnorm(0.975, mean = 0,sd = 1,lower.tail = TRUE)
+UL95 <- Beetle.pred$fit + (z * Beetle.pred$se.fit)
+LL95 <- Beetle.pred$fit - (z * Beetle.pred$se.fit)
+
+par(mfrow=c(1,1))
+plot(logdose, proportions,
+     xlab = expression(log[10]*" CS"[2]*" concentration (mg\ l"^{-1}*")"),
+     ylab = "Proportion",main = "Proportion of insects killed",
+     col = "salmon",pch = 15)
+
+lines(x.grid, 1 - exp(-exp(Beetle.pred$fit)), col="red")
+lines(x.grid, 1 - exp(-exp(UL95)), lty=2, col="red")
+lines(x.grid, 1 - exp(-exp(LL95)), lty=2, col="red")
 ```
