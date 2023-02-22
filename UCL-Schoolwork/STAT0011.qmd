@@ -5,14 +5,20 @@ execute:
   eval: false
 ---
 
-# **Week 1 Bayesian Inference**
+# [**Z Score Table**](https://www.z-table.com/)
 
 # **Important Distributions**
 
-## **Uniform Distribution**
+## **Continuous Distributions**
+
+### **Normal Distribution (Gaussian Distribution)**
+
+![](images/image-2146374466.png)
+
+### **Uniform Distribution**
 
 ![](images/image-1370233818.png)
 
-## **Gamma Distribution**
+### **Gamma Distribution**
 
 ![](images/image-267642431.png)
