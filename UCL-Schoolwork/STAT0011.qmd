@@ -7,6 +7,8 @@ execute:
 
 # [**Z Score Calculator**](https://www.calculator.net/z-score-calculator.html)
 
+# [**Normal Distribution Calculator**](https://www.hackmath.net/en/calculator/normal-distribution)
+
 # **Important Distributions**
 
 ## **Continuous Distributions**
