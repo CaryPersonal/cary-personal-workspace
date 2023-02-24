@@ -3,6 +3,10 @@ title: STAT0011
 subtitle: Decision and Risk
 execute: 
   eval: false
+format:
+  html:
+    code-fold: true
+    code-tools: true
 ---
 
 # [**Z Score Calculator**](https://www.calculator.net/z-score-calculator.html)
