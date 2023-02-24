@@ -24,3 +24,121 @@ execute:
 ### **Gamma Distribution**
 
 ![](images/image-267642431.png)
+
+# **Copula Analysis Using R**
+
+## **Week 5 Data**
+
+Required Packages
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+suppressPackageStartupMessages({
+  library(VineCopula) # Copula analysis
+  library(goftest) # Anderson-Darling Goodness-of-Fit test
+  library(KScorrect) # (Lilliefors-Corrected) Kolmogorov-Smirnov Goodness-of-Fit test
+  library(fGarch) # Time series analysis
+})
+```
+
+Load the data and have a look:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+load("week5data.RData")
+plot(dataset)
+```
+
+This does not look like a sample from a bivariate normal distribution! In fact, `ret1` follows a Student-t distribution with 10 degrees of freedom (df); `ret2` follows a Student-t distribution with 6 df. Let's assume we have this information.
+
+Next we apply **Probability Integral Transform (PIT)** to `ret1` which has Student-t distribution with 10 df:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+u1 <- pstd(dataset$ret1, mean = 0, sd = 1, nu = 10)
+hist(u1)
+```
+
+Implement Kolmogorov-Smirnov test:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+KStest1 <- LcKS(u1, cdf = "punif")
+KStest1$p.value
+```
+
+Implement Anderson-Darling test:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+ADtest1 <- ad.test(u1, null = "punif")
+ADtest1$p.value
+```
+
+Then we apply **Probability Integral Transform (PIT)** to `ret2` which has Student-t distribution with 6 df:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+u2 <- pstd(dataset$ret2, mean = 0, sd = 1, nu = 6)
+hist(u2)
+```
+
+Implement Kolmogorov-Smirnov test:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+KStest2 <- LcKS(u2, cdf = "punif")
+KStest2$p.value
+```
+
+Implement Anderson-Darling test:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+ADtest2 <- ad.test(u1, null = "punif")
+ADtest2$p.value
+```
+
+We **pass** the **test for uniformity** for both transformed log-returns, so we can proceed to copula modelling.
+
+Using `BiCopSelect` function fit various copulas to the dataset and select the copula that provides the best fit based on the **AIC** criterion:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+model <- BiCopSelect(u1, u2, familyset = NA, selectioncrit = "AIC", indeptest = TRUE, level = 0.05)
+model
+```
+
+The model of best fit is **Clayton with the estimated parameter theta = 1.94**.
+
+Next we estimate the Value-at-Risk using the **Monte Carlo simulation** approach based on copula theory:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+N <- 1800
+set.seed(0123)
+u_sim <- BiCopSim(N, family = 3, model$par) # family = 3 means Clayton
+```
+
+Next we apply the component-wise **Inverse Probability Integral Transform (IPIT)** to both `ret1` and `ret2`.
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+ret1_sim <- qstd(u_sim[,1], mean = 0, sd = 1, nu = 10)
+ret2_sim <- qstd(u_sim[,2], mean = 0, sd = 1, nu = 6)
+```
+
+Note that our selected copula model is capable of generating values of log-returns with the observed dependence structure:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow=c(2,1))
+plot(dataset, ylab = "ret2", xlab = "ret1", col = "blue", main = "Original log-returns")
+plot(data.frame(ret1_sim, ret2_sim), ylab = "ret2_sim", xlab = "ret1_sim",
+     col = "blue", main = "Simulated log-returns")
+par(mfrow=c(1,1))
+```
+
+Next, compute portfolio log-returns:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+port_sim <- matrix(0, nrow = N, ncol = 1)
+VaR_sim <- matrix(0, nrow = 1, ncol = 2)
+
+port_sim <- log(1 + ((exp(ret1_sim) - 1) + (exp(ret2_sim) - 1)) * (1 / 2)) # Need to transform individual log-returns back to individual net returns, and compute portfolio net returns, finally compute portfolio log-returns.
+```
+
+Return the estimated 99% and 95% Value-at-Risk estimates:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+var_sim <- quantile(port_sim, c(0.01, 0.05))
+var_sim
+```
