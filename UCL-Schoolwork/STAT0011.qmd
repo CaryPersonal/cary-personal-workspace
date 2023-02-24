@@ -3,10 +3,6 @@ title: STAT0011
 subtitle: Decision and Risk
 execute: 
   eval: false
-format:
-  html:
-    code-fold: true
-    code-tools: true
 ---
 
 # [**Z Score Calculator**](https://www.calculator.net/z-score-calculator.html)
@@ -38,7 +34,7 @@ Required Packages
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 suppressPackageStartupMessages({
   library(VineCopula) # Copula analysis
-  library(goftest) # Anderson-Darling Goodness-of-Fit test
+  library(ADGofTest) # Anderson-Darling Goodness-of-Fit test
   library(KScorrect) # (Lilliefors-Corrected) Kolmogorov-Smirnov Goodness-of-Fit test
   library(fGarch) # Time series analysis
 })
@@ -100,6 +96,7 @@ We **pass** the **test for uniformity** for both transformed log-returns, so we 
 Using `BiCopSelect` function fit various copulas to the dataset and select the copula that provides the best fit based on the **AIC** criterion:
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+plot(cbind(u1, u2))
 model <- BiCopSelect(u1, u2, familyset = NA, selectioncrit = "AIC", indeptest = TRUE, level = 0.05)
 model
 ```
@@ -146,3 +143,127 @@ Return the estimated 99% and 95% Value-at-Risk estimates:
 var_sim <- quantile(port_sim, c(0.01, 0.05))
 var_sim
 ```
+
+# **Time Series Analysis Using R**
+
+## **Week 6 Data**
+
+Required Packages
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+suppressPackageStartupMessages({
+  library(VineCopula) # Copula analysis
+  library(ADGofTest) # Anderson-Darling Goodness-of-Fit test
+  library(KScorrect) # (Lilliefors-Corrected) Kolmogorov-Smirnov Goodness-of-Fit test
+  library(fGarch) # Time series analysis
+  library(tseries)
+})
+```
+
+Load the data:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+load("week6data.RData")
+ret1 <- dataset[,1]
+ret2 <- dataset[,2]
+```
+
+Use the **Jarque--Bera test**, a [goodness-of-fit](https://en.wikipedia.org/wiki/Goodness-of-fit "Goodness-of-fit") test of whether sample data have the [skewness](https://en.wikipedia.org/wiki/Skewness "Skewness") and [kurtosis](https://en.wikipedia.org/wiki/Kurtosis "Kurtosis") matching a [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution "Normal distribution"):
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+jarque.bera.test(ret1)
+jarque.bera.test(ret2)
+```
+
+### **Model for the Conditional Mean: AR Models - the Box-Jenkins Approach**
+
+**Step 1: Identification**
+
+Returns 1
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow=c(2,2))
+acf(ret1, col = "green", lwd = 2)
+pacf(ret1, col = "green", lwd = 2)
+acf(ret1^2, col = "red", lwd = 2)
+par(mfrow=c(1,1))
+```
+
+Returns 2
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+par(mfrow=c(2,2))
+acf(ret2, col = "green", lwd = 2)
+pacf(ret2, col = "green", lwd = 2)
+acf(ret2^2, col = "red", lwd = 2)
+par(mfrow=c(1,1))
+```
+
+**Step 2: Estimation**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+model1 = garchFit(formula = ~ arma(1,0) + garch(1,1), data = ret1, trace = F, cond.dist = "norm")
+model2 = garchFit(formula = ~ arma(3,0) + garch(1,1), data = ret2, trace = F, cond.dist = "norm")
+```
+
+Note: this function uses **all first three lags**, not lag 3 only.
+
+**Step 3: Model Checking**
+
+Returns 1
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+res1 <- residuals(model1, standardize = TRUE)
+par(mfrow=c(2,1))
+acf(res1, col = "green", lwd = 2)
+acf(res1^2, col = "red", lwd = 2)
+par(mfrow=c(1,1))
+Box.test(res1, lag = 10, type = c("Ljung-Box"), fitdf = 1)
+Box.test(res1^2, lag = 10, type = c("Ljung-Box"), fitdf = 1)
+model1@fit$ics
+u1 <- pnorm(res1, mean = 0, sd = 1)[4:length(ret1)]
+hist(u1)
+```
+
+Further distributional checks
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+#Kolmogorov-Smirnov test
+KStest1 <- LcKS(u1, cdf = "punif")
+KStest1$p.value
+
+#Anderson-Darling test
+ADtest1 <- ad.test(u1, null = "punif")
+ADtest1$p.value
+```
+
+Returns 2
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+res2 <- residuals(model2, standardize = TRUE)
+par(mfrow=c(2,1))
+acf(res2, col = "green", lwd = 2)
+acf(res2^2, col = "red", lwd = 2)
+par(mfrow=c(1,1))
+Box.test(res2, lag = 10, type = c("Ljung-Box"), fitdf = 3)
+Box.test(res2^2, lag = 10, type = c("Ljung-Box"), fitdf = 3)
+model2@fit$ics
+u2 <- pnorm(res2, mean = 0, sd = 1)[4:length(ret2)]
+hist(u2)
+```
+
+Further distributional checks
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+#Kolmogorov-Smirnov test
+KStest2 <- LcKS(u2, cdf = "punif")
+KStest2$p.value
+
+#Anderson-Darling test
+ADtest2 <- ad.test(u2, null = "punif")
+ADtest2$p.value
+```
+
+#### Misspecification Example 1: Using AIC and BIC
+
+Let's deliberately choosing the "wrong" AR(1) model instead of AR(3) model to show that te AIC and BIC are indeed helpful model selection criteria!
