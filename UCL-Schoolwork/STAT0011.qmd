@@ -266,4 +266,4 @@ ADtest2$p.value
 
 #### Misspecification Example 1: Using AIC and BIC
 
-Let's deliberately choosing the "wrong" AR(1) model instead of AR(3) model to show that te AIC and BIC are indeed helpful model selection criteria!
+Let's deliberately choosing the "wrong" AR(1) model instead of AR(3) model to show that the AIC and BIC are indeed helpful model selection criteria!

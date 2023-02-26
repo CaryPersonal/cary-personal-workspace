@@ -333,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>KStest1 <span class="ot">&lt;-</span> <span class="fu">LcKS</span>(u1, <span class="at">cdf =</span> <span class="st">"punif"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>KStest1<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3854</code></pre>
+<pre><code>[1] 0.3844</code></pre>
 </div>
 </div>
 <p>Implement Anderson-Darling test:</p>
@@ -358,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>KStest2 <span class="ot">&lt;-</span> <span class="fu">LcKS</span>(u2, <span class="at">cdf =</span> <span class="st">"punif"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>KStest2<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2026</code></pre>
+<pre><code>[1] 0.2008</code></pre>
 </div>
 </div>
 <p>Implement Anderson-Darling test:</p>
@@ -603,7 +603,7 @@ X-squared = 7.5536, df = 7, p-value = 0.3736</code></pre>
 </div>
 <section id="misspecification-example-1-using-aic-and-bic" class="level4">
 <h4 class="anchored" data-anchor-id="misspecification-example-1-using-aic-and-bic">Misspecification Example 1: Using AIC and BIC</h4>
-<p>Let’s deliberately choosing the “wrong” AR(1) model instead of AR(3) model to show that te AIC and BIC are indeed helpful model selection criteria!</p>
+<p>Let’s deliberately choosing the “wrong” AR(1) model instead of AR(3) model to show that the AIC and BIC are indeed helpful model selection criteria!</p>
 
 
 </section>
