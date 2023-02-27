@@ -1,0 +1,16 @@
+{
+  "hash": "0b58e4850d922eeb13414b26ec8a48f9",
+  "result": {
+    "markdown": "---\ntitle: \"R Visualisation\"\nsubtitle: \"KEEP LEARNING!\"\nexecute: \n  eval: false\n---\n\n\n# BBC-Style Graphics\n\n**Required Packages**\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# install.packages('devtools')\n# devtools::install_github('bbc/bbplot')\n# if(!require(pacman))install.packages(\"pacman\")\npacman::p_load('dplyr', 'tidyr', 'gapminder',\n               'ggplot2',  'ggalt',\n               'forcats', 'R.utils', 'png', \n               'grid', 'ggpubr', 'scales',\n               'bbplot')\n```\n:::\n\n\n## Stacked Bar Chart\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Prepare Data\nstacked_df <- gapminder %>%\n  filter(year == 2007) %>%\n  mutate(lifeExpGrouped = cut(lifeExp,\n                              breaks = c(0, 50, 65, 80, 90),\n                              labels = c(\"Under 50\", \"50-65\", \"65-80\", \"80+\"))) %>%\n  group_by(continent, lifeExpGrouped) %>%\n  summarise(continentPop = sum(as.numeric(pop)))\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n`summarise()` has grouped output by 'continent'. You can override using the\n`.groups` argument.\n```\n:::\n\n```{.r .cell-code}\n# Set order of stacks\nstacked_df$lifeExpGrouped = factor(stacked_df$lifeExpGrouped, levels = rev(levels(stacked_df$lifeExpGrouped)))\n\n# Create Plot\nstacked_bars <- ggplot(data = stacked_df, \n                       aes(x = continent,\n                           y = continentPop,\n                           fill = lifeExpGrouped)) +\n  geom_bar(stat = \"identity\", \n           position = \"fill\") +\n  bbc_style() +\n  scale_y_continuous(labels = scales::percent) +\n  scale_fill_viridis_d(direction = -1) +\n  geom_hline(yintercept = 0, size = 1, colour = \"#333333\") +\n  labs(title = \"How life expectancy varies\",\n       subtitle = \"% of population by life expectancy band, 2007\") +\n  theme(legend.position = \"top\", \n        legend.justification = \"left\") +\n  guides(fill = guide_legend(reverse = TRUE))\n\nstacked_bars\n```\n\n::: {.cell-output-display}\n![](Visualisation_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# finalise_plot(plot_name = stacked_bars,\n#               source = \"Source: Opinion Poll\",\n#               save_filepath = \"test.png\",\n#               width_pixels = 640,\n#               height_pixels = 450)\n```\n:::\n",
+    "supporting": [
+      "Visualisation_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
