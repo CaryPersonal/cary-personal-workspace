@@ -5,11 +5,21 @@ execute:
   eval: false
 ---
 
-# Important DDLs {#welcome}
+# **Important DDLs** {#welcome}
 
 | **Subject**           | **Due Date**                         | Status             |
-|---------------------|------------------------------------|---------------|
+|--------------------|-----------------------------------|------------------|
 | STAT0024 Coursework 2 | 16:00, Tuesday, 28 February 2023     | **Pending Review** |
 | STAT0024 ICA          | 16:00, Tuesday, 7 March 2023         |                    |
 | ECON0047 MCQ          | 9:00-10:00, Wednesday, 22 March 2023 |                    |
 | STAT0011 ICA          | 16:00, Friday, 24 March 2023         |                    |
+
+# **Individual Examination Timetable**
+
+| **Examination** | **Date**                 | **Time** | **Duration** |
+|-----------------|--------------------------|----------|--------------|
+| STAT0025        | Wednesday, 26 April 2023 | 14:30    | 2:40         |
+| STAT0011        | Thursday, 27 April 2023  | 10:00    | 2:40         |
+| MATH0050        | Friday, 5 May 2023       | 10:00    | 2:10         |
+| ECON0022        | Tuesday, 16 May 2023     | 10:00    | 2:20         |
+| STAT0024        | Thursday, 18 May 2023    | 14:30    | 2:30         |
