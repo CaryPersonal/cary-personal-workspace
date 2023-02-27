@@ -53,6 +53,14 @@ website:
             text: ECON0047
           - href: UCL-Schoolwork/MATH0050.qmd
             text: MATH0050
+      - section: Programming-Languages/index.qmd
+        text: Programming Languages
+        contents:
+          - section: Programming-Languages/R/index.qmd
+            text: R
+            contents:
+              - href: Programming-Languages/R/Visualisation.qmd
+                text: Visualisation
       - href: learning-more.qmd
         text: Learn more
       - href: transition-from-rmarkdown.qmd
