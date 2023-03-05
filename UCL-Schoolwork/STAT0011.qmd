@@ -177,7 +177,7 @@ jarque.bera.test(ret2)
 
 ### **Model for the Conditional Mean: AR Models - the Box-Jenkins Approach**
 
-**Step 1: Identification**
+#### **Step 1: Identification**
 
 Returns 1
 
@@ -192,32 +192,32 @@ par(mfrow=c(1,1))
 Returns 2
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
-par(mfrow=c(2,2))
+par(mfrow = c(2, 2))
 acf(ret2, col = "green", lwd = 2)
 pacf(ret2, col = "green", lwd = 2)
 acf(ret2^2, col = "red", lwd = 2)
 par(mfrow=c(1,1))
 ```
 
-**Step 2: Estimation**
+#### **Step 2: Estimation**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
-model1 = garchFit(formula = ~ arma(1,0) + garch(1,1), data = ret1, trace = F, cond.dist = "norm")
-model2 = garchFit(formula = ~ arma(3,0) + garch(1,1), data = ret2, trace = F, cond.dist = "norm")
+model1 <- garchFit(formula = ~ arma(1,0) + garch(1,1), data = ret1, trace = F, cond.dist = "norm")
+model2 <- garchFit(formula = ~ arma(3,0) + garch(1,1), data = ret2, trace = F, cond.dist = "norm")
 ```
 
 Note: this function uses **all first three lags**, not lag 3 only.
 
-**Step 3: Model Checking**
+#### **Step 3: Model Checking**
 
 Returns 1
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 res1 <- residuals(model1, standardize = TRUE)
-par(mfrow=c(2,1))
+par(mfrow = c(2, 1))
 acf(res1, col = "green", lwd = 2)
 acf(res1^2, col = "red", lwd = 2)
-par(mfrow=c(1,1))
+par(mfrow = c(1, 1))
 Box.test(res1, lag = 10, type = c("Ljung-Box"), fitdf = 1)
 Box.test(res1^2, lag = 10, type = c("Ljung-Box"), fitdf = 1)
 model1@fit$ics
@@ -241,10 +241,10 @@ Returns 2
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 res2 <- residuals(model2, standardize = TRUE)
-par(mfrow=c(2,1))
+par(mfrow = c(2, 1))
 acf(res2, col = "green", lwd = 2)
 acf(res2^2, col = "red", lwd = 2)
-par(mfrow=c(1,1))
+par(mfrow = c(1, 1))
 Box.test(res2, lag = 10, type = c("Ljung-Box"), fitdf = 3)
 Box.test(res2^2, lag = 10, type = c("Ljung-Box"), fitdf = 3)
 model2@fit$ics
@@ -267,3 +267,27 @@ ADtest2$p.value
 #### Misspecification Example 1: Using AIC and BIC
 
 Let's deliberately choosing the "wrong" AR(1) model instead of AR(3) model to show that the AIC and BIC are indeed helpful model selection criteria!
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+model2b <- garchFit(formula = ~arma(1,0) + garch(1,1), data = ret2, trace = F, cond.dist = "norm")
+res2b <- residuals(model2b, standardize = TRUE)
+
+par(mfrow = c(1, 2))
+acf(res2b, col = "green", lwd = 2)
+acf(res2b^2, col = "red", lwd = 2)
+par(mfrow = c(1, 1))
+
+Box.test(res2b, lag = 10, type = c("Ljung-Box"), fitdf = 1)
+Box.test(res2b^2, lag = 10, type = c("Ljung-Box"), fitdf = 1)
+
+u2b <- pnorm(res2b, mean = 0, sd = 1)
+hist(u2b)
+
+#Kolmogorov-Smirnov test
+KStest2b <- LcKS(u2b, cdf = "punif")
+KStest2b$p.value
+
+#Anderson-Darling test
+ADtest2b <- ad.test(u2b, null = "punif")
+ADtest2b$p.value
+```
