@@ -179,53 +179,72 @@ jarque.bera.test(ret2)
 
 #### **Step 1: Identification**
 
-Returns 1
+**Returns 1**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
-par(mfrow=c(2,2))
+plot(ret1, type = "l")
+
+par(mfrow = c(2, 2))
 acf(ret1, col = "green", lwd = 2)
 pacf(ret1, col = "green", lwd = 2)
-acf(ret1^2, col = "red", lwd = 2)
-par(mfrow=c(1,1))
+acf(ret1^2, col = "red", lwd = 2) # for GARCH effects
+par(mfrow = c(1, 1))
 ```
 
-Returns 2
+We can determine the lags of AR model via the **Partial ACF plot**.
+
+We can use the ACF plot for the squared returns to see if we need to introduce **GARCH effects**, we need to try `garch(1, 1)` up until `garch(3, 3)`.
+
+**Returns 2**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+plot(ret2, type = "l")
+
 par(mfrow = c(2, 2))
 acf(ret2, col = "green", lwd = 2)
 pacf(ret2, col = "green", lwd = 2)
-acf(ret2^2, col = "red", lwd = 2)
-par(mfrow=c(1,1))
+acf(ret2^2, col = "red", lwd = 2) # for GARCH effects
+par(mfrow = c(1, 1))
 ```
+
+We can determine the lags of AR model via the **Partial ACF plot**.
+
+We can use the ACF plot for the squared returns to see if we need to introduce **GARCH effects**, we need to try `garch(1, 1)` up until `garch(3, 3)`.
 
 #### **Step 2: Estimation**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
-model1 <- garchFit(formula = ~ arma(1,0) + garch(1,1), data = ret1, trace = F, cond.dist = "norm")
-model2 <- garchFit(formula = ~ arma(3,0) + garch(1,1), data = ret2, trace = F, cond.dist = "norm")
+model1 <- garchFit(formula = ~ arma(1, 0) + garch(1,1), data = ret1, trace = F, cond.dist = "norm")
+model2 <- garchFit(formula = ~ arma(3, 0) + garch(1,1), data = ret2, trace = F, cond.dist = "norm")
 ```
 
 Note: this function uses **all first three lags**, not lag 3 only.
 
+We can plot the histogram of `ret1` and `ret2` to decide the right distribution for argument `cond.dist =` . We also need to use Kolmogorov-Smirnov test and Anderson-Darling test (see later).
+
 #### **Step 3: Model Checking**
 
-Returns 1
+**Returns 1**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 res1 <- residuals(model1, standardize = TRUE)
+
 par(mfrow = c(2, 1))
 acf(res1, col = "green", lwd = 2)
 acf(res1^2, col = "red", lwd = 2)
 par(mfrow = c(1, 1))
+
+# The Box-Ljung test is to test if there exists autocorrelation, the null is no autocorrelation. We use fitdf = 1 because we used AR(1) model earlier.
 Box.test(res1, lag = 10, type = c("Ljung-Box"), fitdf = 1)
 Box.test(res1^2, lag = 10, type = c("Ljung-Box"), fitdf = 1)
+
 model1@fit$ics
+
 u1 <- pnorm(res1, mean = 0, sd = 1)[4:length(ret1)]
 hist(u1)
 ```
 
-Further distributional checks
+**Further distributional checks:**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 #Kolmogorov-Smirnov test
@@ -237,22 +256,27 @@ ADtest1 <- ad.test(u1, null = "punif")
 ADtest1$p.value
 ```
 
-Returns 2
+**Returns 2**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 res2 <- residuals(model2, standardize = TRUE)
+
 par(mfrow = c(2, 1))
 acf(res2, col = "green", lwd = 2)
 acf(res2^2, col = "red", lwd = 2)
 par(mfrow = c(1, 1))
+
+# The Box-Ljung test is to test if there exists autocorrelation, the null is no autocorrelation. We use fitdf = 3 because we used AR(3) model earlier.
 Box.test(res2, lag = 10, type = c("Ljung-Box"), fitdf = 3)
 Box.test(res2^2, lag = 10, type = c("Ljung-Box"), fitdf = 3)
+
 model2@fit$ics
+
 u2 <- pnorm(res2, mean = 0, sd = 1)[4:length(ret2)]
 hist(u2)
 ```
 
-Further distributional checks
+**Further distributional checks:**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 #Kolmogorov-Smirnov test
@@ -264,7 +288,7 @@ ADtest2 <- ad.test(u2, null = "punif")
 ADtest2$p.value
 ```
 
-#### Misspecification Example 1: Using AIC and BIC
+##### Misspecification Example 1: Using AIC and BIC
 
 Let's deliberately choosing the "wrong" AR(1) model instead of AR(3) model to show that the AIC and BIC are indeed helpful model selection criteria!
 
@@ -292,7 +316,7 @@ ADtest2b <- ad.test(u2b, null = "punif")
 ADtest2b$p.value
 ```
 
-#### Misspecification Example 2: Using Student-t instead of Normal
+##### Misspecification Example 2: Using Student-t instead of Normal
 
 Let's deliberately choose the "wrong" Student-t distribution instead of a Normal distribution. We know that as [the df parameter approaches infinity, the Student-t distribution approaches the Normal distribution]{.underline}. So for the sufficiently large value of (estimated) df parameter, we would not expect to see a big difference between the selection criteria.
 
@@ -337,7 +361,7 @@ rownames(dtests) <- c("AR(3)", "AR(1)", "Student-t")
 dtests
 ```
 
-Copula Modelling
+#### **Copula Modelling**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
 model <- BiCopSelect(u1, u2, familyset = NA, selectioncrit = "AIC", indeptest = TRUE, level = 0.05, se = TRUE)
