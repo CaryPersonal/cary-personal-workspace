@@ -291,3 +291,84 @@ KStest2b$p.value
 ADtest2b <- ad.test(u2b, null = "punif")
 ADtest2b$p.value
 ```
+
+#### Misspecification Example 2: Using Student-t instead of Normal
+
+Let's deliberately choose the "wrong" Student-t distribution instead of a Normal distribution. We know that as [the df parameter approaches infinity, the Student-t distribution approaches the Normal distribution]{.underline}. So for the sufficiently large value of (estimated) df parameter, we would not expect to see a big difference between the selection criteria.
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+model2c <- garchFit(formula = ~arma(3,0) + garch(1,1), data = ret2, trace = F, cond.dist = "std")
+res2c <- residuals(model2c, standardize = TRUE)
+
+par(mfrow = c(1, 2))
+acf(res2c, col = "green", lwd = 2)
+acf(res2c^2, col = "red", lwd = 2)
+par(mfrow = c(1, 1))
+
+Box.test(res2c, lag = 10, type = c("Ljung-Box"), fitdf = 1)
+Box.test(res2c^2, lag = 10, type = c("Ljung-Box"), fitdf = 1)
+coef(model2c)
+
+u2c <- pnorm(res2c, mean = 0, sd = 1)
+hist(u2c)
+
+#Kolmogorov-Smirnov test
+KStest2c <- LcKS(u2c, cdf = "punif")
+KStest2c$p.value
+
+#Anderson-Darling test
+ADtest2c <- ad.test(u2c, null = "punif")
+ADtest2c$p.value
+```
+
+#### **Compare Three Models**
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+ic <- rbind(model2@fit$ics, model2b@fit$ics, model2c@fit$ics)
+rownames(ic) <- c("AR(3)", "AR(1)", "Student-t")
+ic
+```
+
+Let's compare p-values for the KS and AD tests for uniformity:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+dtests <- rbind(c(KStest2$p.value, ADtest2$p.value), c(KStest2b$p.value, ADtest2b$p.value), c(KStest2c$p.value, ADtest2c$p.value))
+rownames(dtests) <- c("AR(3)", "AR(1)", "Student-t")
+dtests
+```
+
+Copula Modelling
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+model <- BiCopSelect(u1, u2, familyset = NA, selectioncrit = "AIC", indeptest = TRUE, level = 0.05, se = TRUE)
+model
+```
+
+Value-at-Risk uisng Monte Carlo simulation:
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+N <- 10000
+u_sim <- BiCopSim(N, family = model$family, model$par,  model$par2)
+```
+
+Here we are assuming marginal models are N(0,1), completely ignoring our knowledge of real DGP
+
+```{r, eval=TRUE, echo=TRUE, warning=FALSE}
+res1_sim <- qnorm(u_sim[,1], mean = 0, sd = 1) 
+res2_sim <- qnorm(u_sim[,2], mean = 0, sd = 1) 
+```
+
+However, "res1_sim" and "res2_sim" are i.i.d. So, the next step is to **re-introduce autocorrelation and GARCH effects** observed in data.
+
+This section has been omitted as this will be part of your ICA group assignment...
+
+99% and 95% VaR:
+
+```{r, eval=FALSE, echo=TRUE, warning=FALSE}
+portsim <- matrix(0, nrow = N, ncol = 1)
+varsim <- matrix(0, nrow = 1, ncol = 2)
+
+portsim <- log(1+((exp(y1simulated) - 1) + (exp(y2simulated) - 1)) * (1/2))
+varsim <- quantile(portsim, c(0.01, 0.05))
+varsim
+```

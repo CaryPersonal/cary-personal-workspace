@@ -358,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>KStest1 <span class="ot">&lt;-</span> <span class="fu">LcKS</span>(u1, <span class="at">cdf =</span> <span class="st">"punif"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>KStest1<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3724</code></pre>
+<pre><code>[1] 0.377</code></pre>
 </div>
 </div>
 <p>Implement Anderson-Darling test:</p>
@@ -383,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>KStest2 <span class="ot">&lt;-</span> <span class="fu">LcKS</span>(u2, <span class="at">cdf =</span> <span class="st">"punif"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>KStest2<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2088</code></pre>
+<pre><code>[1] 0.2062</code></pre>
 </div>
 </div>
 <p>Implement Anderson-Darling test:</p>
@@ -681,6 +681,119 @@ X-squared = 90.379, df = 9, p-value = 1.332e-15</code></pre>
 <pre><code>       AD 
 0.4864833 </code></pre>
 </div>
+</div>
+</section>
+<section id="misspecification-example-2-using-student-t-instead-of-normal" class="level4">
+<h4 class="anchored" data-anchor-id="misspecification-example-2-using-student-t-instead-of-normal">Misspecification Example 2: Using Student-t instead of Normal</h4>
+<p>Let’s deliberately choose the “wrong” Student-t distribution instead of a Normal distribution. We know that as <u>the df parameter approaches infinity, the Student-t distribution approaches the Normal distribution</u>. So for the sufficiently large value of (estimated) df parameter, we would not expect to see a big difference between the selection criteria.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>model2c <span class="ot">&lt;-</span> <span class="fu">garchFit</span>(<span class="at">formula =</span> <span class="sc">~</span><span class="fu">arma</span>(<span class="dv">3</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fu">garch</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">data =</span> ret2, <span class="at">trace =</span> F, <span class="at">cond.dist =</span> <span class="st">"std"</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>res2c <span class="ot">&lt;-</span> <span class="fu">residuals</span>(model2c, <span class="at">standardize =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(res2c, <span class="at">col =</span> <span class="st">"green"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(res2c<span class="sc">^</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="STAT0011_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(res2c, <span class="at">lag =</span> <span class="dv">10</span>, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"Ljung-Box"</span>), <span class="at">fitdf =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Box-Ljung test
+
+data:  res2c
+X-squared = 4.7051, df = 9, p-value = 0.8592</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(res2c<span class="sc">^</span><span class="dv">2</span>, <span class="at">lag =</span> <span class="dv">10</span>, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"Ljung-Box"</span>), <span class="at">fitdf =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Box-Ljung test
+
+data:  res2c^2
+X-squared = 7.8925, df = 9, p-value = 0.545</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model2c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          mu          ar1          ar2          ar3        omega       alpha1 
+ 0.030941630  0.026238762 -0.004798470  0.561470633  0.009426896  0.094068483 
+       beta1        shape 
+ 0.893152245 10.000000000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>u2c <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(res2c, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u2c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="STAT0011_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Kolmogorov-Smirnov test</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>KStest2c <span class="ot">&lt;-</span> <span class="fu">LcKS</span>(u2c, <span class="at">cdf =</span> <span class="st">"punif"</span>)</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>KStest2c<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.533</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Anderson-Darling test</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>ADtest2c <span class="ot">&lt;-</span> <span class="fu">ad.test</span>(u2c, <span class="at">null =</span> <span class="st">"punif"</span>)</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>ADtest2c<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       AD 
+0.5259121 </code></pre>
+</div>
+</div>
+</section>
+<section id="compare-three-models" class="level4">
+<h4 class="anchored" data-anchor-id="compare-three-models"><strong>Compare Three Models</strong></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">rbind</span>(model2<span class="sc">@</span>fit<span class="sc">$</span>ics, model2b<span class="sc">@</span>fit<span class="sc">$</span>ics, model2c<span class="sc">@</span>fit<span class="sc">$</span>ics)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(ic) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AR(3)"</span>, <span class="st">"AR(1)"</span>, <span class="st">"Student-t"</span>)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>ic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               AIC      BIC      SIC     HQIC
+AR(3)     2.011268 2.030871 2.011244 2.018466
+AR(1)     2.371386 2.385388 2.371373 2.376527
+Student-t 2.019908 2.042311 2.019876 2.028134</code></pre>
+</div>
+</div>
+<p>Let’s compare p-values for the KS and AD tests for uniformity:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>dtests <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(KStest2<span class="sc">$</span>p.value, ADtest2<span class="sc">$</span>p.value), <span class="fu">c</span>(KStest2b<span class="sc">$</span>p.value, ADtest2b<span class="sc">$</span>p.value), <span class="fu">c</span>(KStest2c<span class="sc">$</span>p.value, ADtest2c<span class="sc">$</span>p.value))</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(dtests) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AR(3)"</span>, <span class="st">"AR(1)"</span>, <span class="st">"Student-t"</span>)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>dtests</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        AD
+AR(3)     0.6628 0.8804160
+AR(1)     0.3402 0.4864833
+Student-t 0.5330 0.5259121</code></pre>
+</div>
+</div>
+<p>Copula Modelling</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">BiCopSelect</span>(u1, u2, <span class="at">familyset =</span> <span class="cn">NA</span>, <span class="at">selectioncrit =</span> <span class="st">"AIC"</span>, <span class="at">indeptest =</span> <span class="cn">TRUE</span>, <span class="at">level =</span> <span class="fl">0.05</span>, <span class="at">se =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bivariate copula: Clayton (par = 3.01, tau = 0.6) </code></pre>
+</div>
+</div>
+<p>Value-at-Risk uisng Monte Carlo simulation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>u_sim <span class="ot">&lt;-</span> <span class="fu">BiCopSim</span>(N, <span class="at">family =</span> model<span class="sc">$</span>family, model<span class="sc">$</span>par,  model<span class="sc">$</span>par2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here we are assuming marginal models are N(0,1), completely ignoring our knowledge of real DGP</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>res1_sim <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(u_sim[,<span class="dv">1</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) </span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>res2_sim <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(u_sim[,<span class="dv">2</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, “res1_sim” and “res2_sim” are i.i.d. So, the next step is to <strong>re-introduce autocorrelation and GARCH effects</strong> observed in data.</p>
+<p>This section has been omitted as this will be part of your ICA group assignment…</p>
+<p>99% and 95% VaR:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>portsim <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> N, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>varsim <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>portsim <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>((<span class="fu">exp</span>(y1simulated) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> (<span class="fu">exp</span>(y2simulated) <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">*</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>varsim <span class="ot">&lt;-</span> <span class="fu">quantile</span>(portsim, <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.05</span>))</span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>varsim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
