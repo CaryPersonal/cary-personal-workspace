@@ -11,8 +11,8 @@ execute:
 
 | **Subject**           | **Due Date**                         | Status          |
 |---------------------|------------------------------------|---------------|
-| STAT0024 Coursework 3 | 16:00, Tuesday, 14 March 2023        |                 |
-| ECON0047 MCQ          | 9:00-10:00, Wednesday, 22 March 2023 |                 |
+| STAT0024 Coursework 3 | 16:00, Tuesday, 14 March 2023        | **In Progress** |
+| ECON0047 MCQ          | 9:00-10:00, Wednesday, 22 March 2023 | **Reviewing**   |
 | STAT0011 ICA          | 16:00, Friday, 24 March 2023         | **In Progress** |
 
 # **Individual Examination Timetable**
