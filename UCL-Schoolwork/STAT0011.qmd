@@ -214,8 +214,8 @@ We can use the ACF plot for the squared returns to see if we need to introduce *
 #### **Step 2: Estimation**
 
 ```{r, eval=TRUE, echo=TRUE, warning=FALSE}
-model1 <- garchFit(formula = ~ arma(1, 0) + garch(1,1), data = ret1, trace = F, cond.dist = "norm")
-model2 <- garchFit(formula = ~ arma(3, 0) + garch(1,1), data = ret2, trace = F, cond.dist = "norm")
+model1 <- garchFit(formula = ~ arma(1, 0) + garch(1, 1), data = ret1, trace = F, cond.dist = "norm")
+model2 <- garchFit(formula = ~ arma(3, 0) + garch(1, 1), data = ret2, trace = F, cond.dist = "norm")
 ```
 
 Note: this function uses **all first three lags**, not lag 3 only.

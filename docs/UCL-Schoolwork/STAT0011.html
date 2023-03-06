@@ -358,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>KStest1 <span class="ot">&lt;-</span> <span class="fu">LcKS</span>(u1, <span class="at">cdf =</span> <span class="st">"punif"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>KStest1<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3802</code></pre>
+<pre><code>[1] 0.3834</code></pre>
 </div>
 </div>
 <p>Implement Anderson-Darling test:</p>
@@ -383,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>KStest2 <span class="ot">&lt;-</span> <span class="fu">LcKS</span>(u2, <span class="at">cdf =</span> <span class="st">"punif"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>KStest2<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2172</code></pre>
+<pre><code>[1] 0.2008</code></pre>
 </div>
 </div>
 <p>Implement Anderson-Darling test:</p>
@@ -530,8 +530,8 @@ X-squared = 888.08, df = 2, p-value &lt; 2.2e-16</code></pre>
 <section id="step-2-estimation" class="level4">
 <h4 class="anchored" data-anchor-id="step-2-estimation"><strong>Step 2: Estimation</strong></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">garchFit</span>(<span class="at">formula =</span> <span class="sc">~</span> <span class="fu">arma</span>(<span class="dv">1</span>, <span class="dv">0</span>) <span class="sc">+</span> <span class="fu">garch</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">data =</span> ret1, <span class="at">trace =</span> F, <span class="at">cond.dist =</span> <span class="st">"norm"</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">garchFit</span>(<span class="at">formula =</span> <span class="sc">~</span> <span class="fu">arma</span>(<span class="dv">3</span>, <span class="dv">0</span>) <span class="sc">+</span> <span class="fu">garch</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">data =</span> ret2, <span class="at">trace =</span> F, <span class="at">cond.dist =</span> <span class="st">"norm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">garchFit</span>(<span class="at">formula =</span> <span class="sc">~</span> <span class="fu">arma</span>(<span class="dv">1</span>, <span class="dv">0</span>) <span class="sc">+</span> <span class="fu">garch</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">data =</span> ret1, <span class="at">trace =</span> F, <span class="at">cond.dist =</span> <span class="st">"norm"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">garchFit</span>(<span class="at">formula =</span> <span class="sc">~</span> <span class="fu">arma</span>(<span class="dv">3</span>, <span class="dv">0</span>) <span class="sc">+</span> <span class="fu">garch</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">data =</span> ret2, <span class="at">trace =</span> F, <span class="at">cond.dist =</span> <span class="st">"norm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note: this function uses <strong>all first three lags</strong>, not lag 3 only.</p>
 <p>We can plot the histogram of <code>ret1</code> and <code>ret2</code> to decide the right distribution for argument <code>cond.dist =</code> . We also need to use Kolmogorov-Smirnov test and Anderson-Darling test (see later).</p>
